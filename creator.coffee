@@ -13,4 +13,5 @@ Updated: 1/20/2016
 RadarGrapher = angular.module 'RadarGrapherCreator'
 
 RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
+	Materia.CreatorCore.start $scope
 ]

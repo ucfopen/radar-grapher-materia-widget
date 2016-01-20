@@ -1,0 +1,6 @@
+---
+general:
+  name: Radar Grapher
+files:
+  creator: creator.html
+  player: player.html

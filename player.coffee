@@ -11,4 +11,5 @@ Authors: Ivey Padgett
 RadarGrapher = angular.module 'RadarGrapherEngine'
 
 RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
+	Materia.Engine.start($scope)
 ]
