@@ -1,2 +1,28 @@
 ---
 name: Radar Grapher
+qset:
+  version: 1
+  data:
+    items:
+      -
+        materiaType: question
+        id: null
+        type: MC
+        questions:
+          -
+            text: How do you feel about X?
+        answers:
+          -
+            text: '[No Answer]'
+            value: 0
+      -
+        materiaType: question
+        id: null
+        type: MC
+        questions:
+          -
+            text: How do you feel about Y?
+        answers:
+          -
+            text: '[No Answer]'
+            value: 0
