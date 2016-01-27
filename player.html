@@ -9,6 +9,7 @@
 
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.css">
 		<link rel="stylesheet" type="text/css" href="player.css">
 
 		<!-- REQUIRED MATERIA JAVASCRIPT -->
@@ -24,6 +25,12 @@
 		<!-- ANGULAR MATERIAL -->
 		<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
 
+		<!-- CHART.JS -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+		<!-- ANGULAR CHART -->
+		<script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+
 		<!-- MAIN WIDGET SCRIPT -->
 		<script src="player.js"></script>
 	</head>
@@ -34,23 +41,28 @@
 					<h2>{{instance.name}}</h2>
 				</div>
 			</md-toolbar>
-			<md-card ng-repeat="question in qset.items" class="md-whiteframe-3dp card">
-				<md-card-title>
-					<span class="md-headline">{{question.questions[0].text}}</span>
-				</md-card-title>
-				<md-card-actions layout>
-					<div flex="15" layout layout-align="center center">
-						<span class="md-body-1">Unrelatable</span>
-					</div>
-					<md-slider flex min="0" max="100" ng-model="response[$index]" aria-label="slider" class>
-					</md-slider>
-					<div flex="15" layout layout-align="center center">
-						<span class="md-body-1">Relatable</span>
-					</div>
-				</md-card-actions>
-			</md-card>
-			<section layout layout-align="center center">
-				<md-button class="md-raised md-primary">Submit</md-button>
+			<section ng-if="inProgress">
+				<md-card ng-repeat="question in qset.items" ng-init="responses[$index] = 0" class="md-whiteframe-3dp card">
+					<md-card-title>
+						<span class="md-headline">{{question.questions[0].text}}</span>
+					</md-card-title>
+					<md-card-actions layout>
+						<div flex="15" layout layout-align="center center">
+							<span class="md-body-1">Unrelatable</span>
+						</div>
+						<md-slider flex min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
+						</md-slider>
+						<div flex="15" layout layout-align="center center">
+							<span class="md-body-1">Relatable</span>
+						</div>
+					</md-card-actions>
+				</md-card>
+				<section layout layout-align="center center">
+					<md-button class="md-raised md-primary" ng-click="submit()">Submit</md-button>
+				</section>
+			</section>
+			<section ng-if="!inProgress">
+				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-options="options"></canvas>
 			</section>
 		</md-content>
 	</body>
