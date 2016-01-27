@@ -17,14 +17,19 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 	$scope.responses = []
 
 	# Chart variables
-	$scope.labels = ["test1", "test2", "test3"]
+	$scope.labels = []
 	$scope.data = []
 	$scope.options = {}
 
 	$scope.start = (instance, qset, version) ->
 		$scope.instance = instance
 		$scope.qset = qset
+		populateLabels()
 		$scope.$apply()
+
+	populateLabels = ->
+		for question in $scope.qset.items
+			$scope.labels.push(question.label)
 
 	$scope.submit = ->
 		# The data variable has to be in the form of array[array[]] due to

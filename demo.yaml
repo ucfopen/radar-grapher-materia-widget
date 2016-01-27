@@ -8,6 +8,7 @@ qset:
         materiaType: question
         id: null
         type: MC
+        label: X
         questions:
           -
             text: How do you feel about X?
@@ -19,6 +20,7 @@ qset:
         materiaType: question
         id: null
         type: MC
+        label: Y
         questions:
           -
             text: How do you feel about Y?
@@ -30,6 +32,7 @@ qset:
         materiaType: question
         id: null
         type: MC
+        label: Z
         questions:
           -
             text: How do you feel about Z?
