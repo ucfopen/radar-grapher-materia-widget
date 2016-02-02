@@ -1,6 +1,7 @@
 ---
 general:
   name: Radar Grapher
+  width: 800
 files:
   creator: creator.html
   player: player.html
