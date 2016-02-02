@@ -62,7 +62,8 @@
 				</section>
 			</section>
 			<section ng-if="!inProgress">
-				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-options="options"></canvas>
+				<canvas id="radar" class="chart" ng-circle></canvas>
+				<canvas id="sibling"></canvas>
 			</section>
 		</md-content>
 	</body>
