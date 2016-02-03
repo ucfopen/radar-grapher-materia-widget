@@ -34,6 +34,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 			$scope.data.labels.push(question.label)
 
 	$scope.submit = ->
+		_padResponses()
 		# The datasets objects take data and options for the dataset.
 		$scope.data.datasets.push {
 			fillColor: "rgba(255,64,129, 0.5)"
@@ -42,6 +43,11 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 		# Change the screen from questions to chart
 		$scope.inProgress = false
+
+	# Add 20 to each response to make room for the circle in the center of the graph.
+	_padResponses = ->
+		for response, i in $scope.responses
+			$scope.responses[i] = response + 20
 
 	Materia.Engine.start($scope)
 ]
@@ -57,7 +63,7 @@ RadarGrapher.directive 'ngCircle', ->
 
 			myChart = new Chart(ctx).Radar(scope.$parent.data, {
 				scaleOverride: true
-				scaleSteps: 6 # We add padding to the graph to make room for the circle
+				scaleSteps: 7 # We add padding to the graph to make room for the circle
 				scaleStepWidth: 20
 				scaleStartValue: 0 # The chart is always from 0 to 100
 				scaleShowLine: false
@@ -71,9 +77,15 @@ RadarGrapher.directive 'ngCircle', ->
 					blank.height = canvas.height
 
 					ctx2 = blank.getContext('2d')
+					ctx2.fillStyle = "#212121"
+					ctx2.strokeStyle = "#212121"
 					ctx2.beginPath()
 					ctx2.lineWidth = 20
 					ctx2.arc(canvas.width / 2, canvas.height / 2 - 3, 165, 0, 2 * Math.PI)
 					ctx2.stroke()
+
+					ctx2.beginPath()
+					ctx2.arc(canvas.width / 2, canvas.height / 2 - 3, 20, 0, 2 * Math.PI)
+					ctx2.fill()
 			})
 	}
