@@ -47,13 +47,17 @@
 					</md-input-container>
 				</md-card-title>
 				<md-card-actions layout>
-					<div flex="15" layout layout-align="center center">
-						<span class="md-body-1">Min</span>
-					</div>
+					<md-input-container class="md-block" flex="15">
+						<label>Min Label</label>
+						<input ng-model="card.min">
+						<div class="hint">Label for what 0 means.</div>
+					</md-input-container>
 					<md-slider flex min="0" max="100" aria-label="slider"></md-slider>
-					<div flex="15" layout layout-align="center center">
-						<span class="md-body-1">Max</span>
-					</div>
+					<md-input-container class="md-block" flex="15">
+						<label>Max Label</label>
+						<input ng-model="card.max">
+						<div class="hint">Label for what 100 means.</div>
+					</md-input-container>
 				</md-card-actions>
 			</md-card>
 		</md-content>

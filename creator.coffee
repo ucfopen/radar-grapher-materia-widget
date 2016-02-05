@@ -14,18 +14,26 @@ RadarGrapher = angular.module 'RadarGrapherCreator', ['ngMaterial']
 
 RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 	$scope.widgetTitle = "My Radar Grapher Widget"
+
+	# Input data for each question. Start with samples of 3.
 	$scope.cards = [
 		{
 			'question': 'Question 1'
 			'label': 'Label 1'
+			'min': 'Min 1'
+			'max': 'Max 1'
 		}
 		{
 			'question': 'Question 2'
 			'label': 'Label 2'
+			'min': 'Min 2'
+			'max': 'Max 2'
 		}
 		{
 			'question': 'Question 3'
 			'label': 'Label 3'
+			'min': 'Min 3'
+			'max': 'Max 3'
 		}
 	]
 
