@@ -14,6 +14,20 @@ RadarGrapher = angular.module 'RadarGrapherCreator', ['ngMaterial']
 
 RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 	$scope.widgetTitle = "My Radar Grapher Widget"
+	$scope.cards = [
+		{
+			'question': 'Question 1'
+			'label': 'Label 1'
+		}
+		{
+			'question': 'Question 2'
+			'label': 'Label 2'
+		}
+		{
+			'question': 'Question 3'
+			'label': 'Label 3'
+		}
+	]
 
 	Materia.CreatorCore.start $scope
 ]

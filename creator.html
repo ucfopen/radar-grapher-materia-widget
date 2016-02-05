@@ -30,11 +30,21 @@
 					<md-input-container class="md-block widget-title" flex>
 						<label id="widget-title-label">Widget Name</label>
 						<input ng-model="widgetTitle">
+					</md-input-container>
 				</div>
 			</md-toolbar>
-			<md-card class="md-whiteframe-3dp card">
-				<md-card-title>
-					<span class="md-headline">Question</span>
+			<md-card class="md-whiteframe-3dp card" ng-repeat="card in cards">
+				<md-card-title layout="row">
+					<md-input-container class="md-block" flex>
+						<label>Question</label>
+						<input ng-model="card.question">
+						<div class="hint">Write up a question to match the label.</div>
+					</md-input-container>
+					<md-input-container class="md-block" flex="25">
+						<label>Label</label>
+						<input ng-model="card.label">
+						<div class="hint">This is what the graph will be labeled with.</div>
+					</md-input-container>
 				</md-card-title>
 				<md-card-actions layout>
 					<div flex="15" layout layout-align="center center">
