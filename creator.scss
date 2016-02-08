@@ -9,6 +9,12 @@
 
 .card {
 	margin: 20px;
+
+	md-card-title {
+		padding: 0;
+		margin: 8px;
+		padding-top: 20px;
+	}
 }
 
 .widget-title {
