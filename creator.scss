@@ -1,3 +1,4 @@
+/* Icomoon stuff */
 @font-face {
     font-family: 'icomoon';
     src:    url('fonts/icomoon.eot?s7d14u');
@@ -31,48 +32,45 @@
     content: "\e901";
 }
 
+/* Creator CSS */
 #container {
 	background-color: #F3F3F3;
 	height: 100%;
-}
 
-.md-toolbar-tools h2 {
-	margin-left: 5px;
-}
-
-.card {
-	margin: 20px;
-
-	md-card-title {
-		padding: 0;
-		margin: 8px;
-		padding-top: 20px;
+	md-input-container {
+		margin: 5px;
 	}
-}
 
-.widget-title {
-	margin-top: 45px;
-}
+	.widget-title {
+		margin-top: 45px;
 
-#widget-title-label {
-	color: rgba(255, 255, 255, 0.85);
-}
+		#widget-title-label {
+			color: rgba(255, 255, 255, 0.85);
+		}
+	}
 
-.card .hint {
-	position: absolute;
-	left: 2px;
-	right: auto;
-	bottom: 7px;
-	font-size: 12px;
-	line-height: 14px;
-	transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-	color: grey;
-}
+	.card {
+		margin: 20px;
 
-md-input-container {
-	margin: 5px;
-}
+		md-card-title {
+			padding: 0;
+			margin: 8px;
+			padding-top: 20px;
+		}
 
-button.md-button md-icon {
-	vertical-align: initial;
+		.hint {
+			position: absolute;
+			left: 2px;
+			right: auto;
+			bottom: 7px;
+			font-size: 12px;
+			line-height: 14px;
+			transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+			color: grey;
+		}
+	}
+
+	button.md-button md-icon {
+		vertical-align: initial;
+	}
 }
