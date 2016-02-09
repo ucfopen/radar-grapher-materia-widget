@@ -37,6 +37,20 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 		}
 	]
 
+	# Add new	questions when the plus button is clicked as long as there are
+	# less than 10 questions.
+	$scope.addQuestion = ->
+		if $scope.cards.length >= 10
+			return
+
+		newIndex = $scope.cards.length + 1
+		$scope.cards.push {
+			'question': "Question #{newIndex}"
+			'label': "Label #{newIndex}"
+			'min': "Min #{newIndex}"
+			'max': "Max #{newIndex}"
+		}
+
 	Materia.CreatorCore.start $scope
 ]
 
