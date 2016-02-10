@@ -33,37 +33,41 @@
 					</md-input-container>
 				</div>
 			</md-toolbar>
-			<md-card class="md-whiteframe-3dp card" ng-repeat="card in cards">
-				<md-card-title layout="row">
-					<md-input-container class="md-block" flex>
-						<label>Question</label>
-						<input ng-model="card.question">
-						<div class="hint">Write up a question to match the label.</div>
-					</md-input-container>
-					<md-input-container class="md-block" flex="25">
-						<label>Label</label>
-						<input ng-model="card.label">
-						<div class="hint">This is what the graph will be labeled with.</div>
-					</md-input-container>
-				</md-card-title>
-				<md-card-actions layout>
-					<md-input-container class="md-block" flex="15">
-						<label>Min Label</label>
-						<input ng-model="card.min">
-						<div class="hint">Label for what 0 means.</div>
-					</md-input-container>
-					<md-slider flex min="0" max="100" aria-label="slider"></md-slider>
-					<md-input-container class="md-block" flex="15">
-						<label>Max Label</label>
-						<input ng-model="card.max">
-						<div class="hint">Label for what 100 means.</div>
-					</md-input-container>
-				</md-card-actions>
-			</md-card>
-			<div layout layout-align="center center">
-				<md-button class="md-accent md-raised add-question" ng-click="addQuestion()">
-					Add Question
-				</md-button>
+			<div layout="row" layout-sm="column">
+				<div flex="30">
+				</div>
+				<div flex="70">
+					<md-card class="md-whiteframe-3dp card" ng-repeat="card in cards" layout="row">
+						<div flex="25" class="card-left" layout layout-align="center center">
+							<md-input-container class="md-block">
+								<label>Axis Label</label>
+								<input ng-model="card.label">
+							</md-input-container>
+						</div>
+						<div class="card-right" layout="column" flex>
+							<md-input-container class="md-block">
+								<label>Question</label>
+								<input ng-model="card.question">
+							</md-input-container>
+							<div layout="row">
+								<md-input-container class="md-block" flex="25">
+									<label>0% Label</label>
+									<input ng-model="card.min">
+								</md-input-container>
+								<md-slider flex min="0" max="100" aria-label="slider"></md-slider>
+								<md-input-container class="md-block" flex="25">
+									<label>100% Label</label>
+									<input ng-model="card.max">
+								</md-input-container>
+							</div>
+						</div>
+					</md-card>
+					<div layout layout-align="center center">
+						<md-button class="md-accent md-raised add-question" ng-click="addQuestion()">
+							Add Question
+						</md-button>
+					</div>
+				</div>
 			</div>
 		</md-content>
 	</body>
