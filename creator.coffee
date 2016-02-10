@@ -44,12 +44,7 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 			return
 
 		newIndex = $scope.cards.length + 1
-		$scope.cards.push {
-			'question': "Question #{newIndex}"
-			'label': "Label #{newIndex}"
-			'min': "Min #{newIndex}"
-			'max': "Max #{newIndex}"
-		}
+		$scope.cards.push {}
 
 	Materia.CreatorCore.start $scope
 ]
