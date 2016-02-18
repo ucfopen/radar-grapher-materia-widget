@@ -6,6 +6,7 @@
 
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+		<link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.css">
 		<link rel="stylesheet" type="text/css" href="creator.css">
 
 		<!-- REQUIRED MATERIA JAVASCRIPT -->
@@ -19,6 +20,12 @@
 
 		<!-- ANGULAR MATERIAL -->
 		<script src="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+		<!-- CHART.JS -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+
+		<!-- ANGULAR CHART -->
+		<script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
 
 		<!-- MAIN CREATOR SCRIPT -->
 		<script src="creator.js"></script>
@@ -34,14 +41,16 @@
 				</div>
 			</md-toolbar>
 			<div layout-gt-sm="row" layout="column">
-				<div flex-gt-sm="30" flex="100">
+				<div flex-gt-sm="40" flex="100" id="chartContainer" layout layout-align="center center">
+					<canvas id="radar" class="chart" ng-circle flex="100"></canvas>
+					<!--<canvas id="sibling"></canvas>-->
 				</div>
-				<div flex-gt-sm="70" flex="100">
+				<div flex-gt-sm="60" flex="100">
 					<md-card class="md-whiteframe-3dp card" ng-repeat="card in cards" layout="row">
 						<div flex="25" class="card-left" layout layout-align="center center">
 							<md-input-container class="md-block">
 								<label>Axis Label</label>
-								<input ng-model="card.label">
+								<input ng-model="card.label" ng-change="updateLabels($index, card.label)">
 							</md-input-container>
 						</div>
 						<div class="card-right" layout="column" flex>
@@ -54,7 +63,7 @@
 									<label>0% Label</label>
 									<input ng-model="card.min">
 								</md-input-container>
-								<md-slider flex min="0" max="100" aria-label="slider"></md-slider>
+								<md-slider flex min="0" max="100" aria-label="slider" ng-model="data.datasets[0].data[$index]"></md-slider>
 								<md-input-container class="md-block" flex="25">
 									<label>100% Label</label>
 									<input ng-model="card.max">

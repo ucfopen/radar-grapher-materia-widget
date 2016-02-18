@@ -61,6 +61,7 @@ RadarGrapher.directive 'ngCircle', ->
 			canvas = ele[0]
 			ctx = canvas.getContext('2d')
 
+			console.log scope.$parent.data
 			myChart = new Chart(ctx).Radar(scope.$parent.data, {
 				scaleOverride: true
 				scaleSteps: 7 # We add padding to the graph to make room for the circle
