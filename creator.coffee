@@ -71,36 +71,6 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 	Materia.CreatorCore.start $scope
 ]
 
-chartOptions = {
-	scaleOverride: true
-	scaleSteps: 7 # We add padding to the graph to make room for the circle
-	scaleStepWidth: 20
-	scaleStartValue: 0 # The chart is always from 0 to 100
-	scaleShowLine: false
-	pointLabelFontSize: 20
-	# This gets called multiple times but it will draw the circle without
-	# the delay of onAnimationComplete.
-	###
-	onAnimationProgress: ->
-		# Canvas to draw the circle border
-		blank = canvas.nextElementSibling
-		blank.width = canvas.width
-		blank.height = canvas.height
-
-		ctx2 = blank.getContext('2d')
-		ctx2.fillStyle = "#212121"
-		ctx2.strokeStyle = "#212121"
-		ctx2.beginPath()
-		ctx2.lineWidth = 20
-		ctx2.arc(canvas.width / 2, canvas.height / 2 - 3, 165, 0, 2 * Math.PI)
-		ctx2.stroke()
-
-		ctx2.beginPath()
-		ctx2.arc(canvas.width / 2, canvas.height / 2 - 3, 20, 0, 2 * Math.PI)
-		ctx2.fill()
-	###
-}
-
 RadarGrapher.directive 'ngCircle', ->
 	return {
 		restrict: 'A'
@@ -108,13 +78,22 @@ RadarGrapher.directive 'ngCircle', ->
 			canvas = ele[0]
 			ctx = canvas.getContext('2d')
 
+			chartOptions = {
+				scaleOverride: true
+				scaleSteps: 5
+				scaleStepWidth: 20
+				scaleStartValue: 0 # The chart is always from 0 to 100
+				scaleShowLine: false
+				pointLabelFontSize: 20
+			}
+
 			myChart = new Chart(ctx).Radar(scope.data, chartOptions)
 
 			scope.$watch('data', () ->
 				if myChart?
 					myChart.destroy()
-					canvas = '<canvas id="radar" class="chart" ng-circle flex="100"></canvas>'
-					document.getElementById("chartContainer").innerHTML = canvas
+					cnv = '<canvas id="radar" class="chart" ng-circle></canvas>'
+					document.getElementById("chartContainer").innerHTML = cnv
 					ctx = document.getElementById("radar").getContext('2d')
 					myChart = new Chart(ctx).Radar(scope.data, chartOptions)
 			, true)
