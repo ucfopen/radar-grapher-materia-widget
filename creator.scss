@@ -6,18 +6,18 @@
 
 	md-toolbar {
 		position: fixed;
+
+		.widget-title {
+			margin-top: 45px;
+
+			#widget-title-label {
+				color: rgba(255, 255, 255, 0.85);
+			}
+		}
 	}
 
 	md-input-container {
 		margin: 5px;
-	}
-
-	.widget-title {
-		margin-top: 45px;
-
-		#widget-title-label {
-			color: rgba(255, 255, 255, 0.85);
-		}
 	}
 
 	#content {
@@ -27,31 +27,33 @@
 		#card-container {
 			max-height: 100%;
 			overflow: scroll;
-		}
-	}
 
-	.card {
-		margin: 20px;
-		padding: 5px 10px;
+			.card {
+				margin: 20px;
+				padding: 5px 10px;
 
-		.card-left {
-			border-right: 1px solid rgba(0,0,0,0.1);
-			padding-right: 10px;
-		}
-		.card-right {
-			padding-left: 10px;
-		}
-		md-input-container {
-			margin: 25px 5px 15px;
+				.card-left {
+					border-right: 1px solid rgba(0,0,0,0.1);
+					padding-right: 10px;
+				}
 
-			.md-errors-spacer {
-				min-height: 0;
+				.card-right {
+					padding-left: 10px;
+				}
+
+				md-input-container {
+					margin: 25px 5px 15px;
+
+					.md-errors-spacer {
+						min-height: 0;
+					}
+				}
+			}
+
+			button.md-button.add-question {
+				padding: 0 10px;
+				margin-bottom: 20px;
 			}
 		}
-	}
-
-	button.md-button.add-question {
-		padding: 0 10px;
-		margin-bottom: 20px;
 	}
 }

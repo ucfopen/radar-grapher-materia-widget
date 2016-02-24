@@ -93,7 +93,7 @@ RadarGrapher.directive 'ngCircle', ->
 				if myChart?
 					myChart.destroy()
 					cnv = '<canvas id="radar" class="chart" ng-circle></canvas>'
-					document.getElementById("chartContainer").innerHTML = cnv
+					document.getElementById("chart-container").innerHTML = cnv
 					ctx = document.getElementById("radar").getContext('2d')
 					myChart = new Chart(ctx).Radar(scope.data, chartOptions)
 			, true)
