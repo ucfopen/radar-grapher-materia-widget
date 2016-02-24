@@ -21,9 +21,13 @@
 	}
 
 	#content {
-		overflow: scroll;
 		height: 100%;
 		padding-top: 64px;
+
+		#card-container {
+			max-height: 100%;
+			overflow: scroll;
+		}
 	}
 
 	.card {
