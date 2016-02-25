@@ -41,10 +41,13 @@
 				</div>
 			</md-toolbar>
 			<div layout-gt-sm="row" layout="column" id="content">
-				<div flex-gt-sm="40" flex="100" id="chart-container" layout layout-align="center center">
-					<canvas id="radar" class="chart" ng-circle></canvas>
+				<div flex="45" id="chart-container" layout="column" layout-align="center center">
+					<h2>Preview</h2>
+					<md-card class="md-whiteframe-3dp card" id="graph-container">
+						<canvas id="radar" class="chart" ng-circle></canvas>
+					</md-card>
 				</div>
-				<div flex-gt-sm="60" flex="100" id="card-container">
+				<div flex="55" id="card-container">
 					<md-card class="md-whiteframe-3dp card" ng-repeat="card in cards" layout="row">
 						<div flex="25" class="card-left" layout layout-align="center center">
 							<md-input-container class="md-block">

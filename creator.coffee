@@ -84,7 +84,8 @@ RadarGrapher.directive 'ngCircle', ->
 				scaleStepWidth: 20
 				scaleStartValue: 0 # The chart is always from 0 to 100
 				scaleShowLine: false
-				pointLabelFontSize: 20
+				pointLabelFontSize: 15
+				responsive: false
 			}
 
 			myChart = new Chart(ctx).Radar(scope.data, chartOptions)
@@ -93,7 +94,7 @@ RadarGrapher.directive 'ngCircle', ->
 				if myChart?
 					myChart.destroy()
 					cnv = '<canvas id="radar" class="chart" ng-circle></canvas>'
-					document.getElementById("chart-container").innerHTML = cnv
+					document.getElementById("graph-container").innerHTML = cnv
 					ctx = document.getElementById("radar").getContext('2d')
 					myChart = new Chart(ctx).Radar(scope.data, chartOptions)
 			, true)
