@@ -73,7 +73,7 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope
 		$mdToast.show(
 			$mdToast.simple()
 				.textContent('Maximum of 10 questions reached')
-				.position('bottom left right')
+				.position('bottom right')
 				.hideDelay(3000)
 		)
 	Materia.CreatorCore.start $scope
