@@ -74,6 +74,12 @@
 				padding: 0 10px;
 				margin-bottom: 20px;
 			}
+			button.disabled {
+				background-color: rgba(0,0,0,0.12);
+				color: rgba(0,0,0,0.26) !important;
+				cursor: default;
+				box-shadow: none;
+			}
 		}
 	}
 }

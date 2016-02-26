@@ -12,7 +12,7 @@ Updated: 1/20/2016
 # Create an angular module to house our controller
 RadarGrapher = angular.module 'RadarGrapherCreator', ['ngMaterial', 'chart.js']
 
-RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
+RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope, $mdToast) ->
 	$scope.widgetTitle = "My Radar Grapher Widget"
 
 	$scope.data = {
@@ -58,6 +58,7 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 	# less than 10 questions.
 	$scope.addQuestion = ->
 		if $scope.cards.length >= 10
+			$scope.showToast()
 			return
 
 		newIndex = $scope.cards.length + 1
@@ -68,6 +69,13 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', ($scope) ->
 	$scope.updateLabels = (index, label) ->
 		$scope.data.labels[index] = label
 
+	$scope.showToast = ->
+		$mdToast.show(
+			$mdToast.simple()
+				.textContent('Maximum of 10 questions reached')
+				.position('bottom left right')
+				.hideDelay(3000)
+		)
 	Materia.CreatorCore.start $scope
 ]
 

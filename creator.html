@@ -74,7 +74,7 @@
 						</div>
 					</md-card>
 					<div layout layout-align="center center">
-						<md-button class="md-accent md-raised add-question" ng-click="addQuestion()">
+						<md-button class="md-accent md-raised add-question" ng-click="addQuestion()" ng-class="{'disabled': cards.length >= 10}">
 							Add Question
 						</md-button>
 					</div>
