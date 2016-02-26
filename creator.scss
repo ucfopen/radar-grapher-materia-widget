@@ -59,6 +59,17 @@
 
 				.card-right {
 					padding-left: 10px;
+					position: relative;
+
+					.delete {
+						position: absolute;
+						right: 0;
+						cursor: pointer;
+						opacity: 0.5;
+						border: none;
+						background-color: #fff;
+						outline: none;
+					}
 				}
 
 				md-input-container {

@@ -58,7 +58,7 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope
 	# less than 10 questions.
 	$scope.addQuestion = ->
 		if $scope.cards.length >= 10
-			$scope.showToast()
+			$scope.showToast("Maximum of 10 questions reached")
 			return
 
 		newIndex = $scope.cards.length + 1
@@ -66,16 +66,25 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope
 		$scope.data.labels.push ""
 		$scope.data.datasets[0].data.push 0
 
+	$scope.deleteQuestion = (index) ->
+		if $scope.cards.length <= 3
+			$scope.showToast("Minimum of 3 questions reached")
+			return
+		$scope.cards.splice index, 1
+		$scope.data.labels.splice index, 1
+		$scope.data.datasets[0].data.splice index, 1
+
 	$scope.updateLabels = (index, label) ->
 		$scope.data.labels[index] = label
 
-	$scope.showToast = ->
+	$scope.showToast = (message) ->
 		$mdToast.show(
 			$mdToast.simple()
-				.textContent('Maximum of 10 questions reached')
+				.textContent(message)
 				.position('bottom right')
 				.hideDelay(3000)
 		)
+
 	Materia.CreatorCore.start $scope
 ]
 
