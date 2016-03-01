@@ -87,10 +87,6 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', '$sanit
 		)
 
 	$scope.onSaveClicked = (mode = 'save') ->
-		if $scope.widgetTitle is ''
-			Materia.CreatorCore.cancelSave "Please make sure you set a title"
-			return false
-
 		_isValid = $scope.validation()
 
 		if _isValid
@@ -126,7 +122,7 @@ RadarGrapher.factory 'Resource', ['$sanitize', ($sanitize) ->
 		qset = {}
 
 		if title is ''
-			# Materia.CreatorCore.cancelSave 'Please enter a title.'
+			Materia.CreatorCore.cancelSave 'Please enter a title.'
 			return false
 
 		for question in questions
