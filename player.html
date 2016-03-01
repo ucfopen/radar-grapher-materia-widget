@@ -48,12 +48,12 @@
 					</md-card-title>
 					<md-card-actions layout>
 						<div flex="15" layout layout-align="center center">
-							<span class="md-body-1">Unrelatable</span>
+							<span class="md-body-1">{{question.min}}</span>
 						</div>
 						<md-slider flex min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
 						</md-slider>
 						<div flex="15" layout layout-align="center center">
-							<span class="md-body-1">Relatable</span>
+							<span class="md-body-1">{{question.max}}</span>
 						</div>
 					</md-card-actions>
 				</md-card>

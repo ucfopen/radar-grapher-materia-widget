@@ -9,6 +9,8 @@ qset:
         id: null
         type: MC
         label: U
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about U?
@@ -21,6 +23,8 @@ qset:
         id: null
         type: MC
         label: V
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about V?
@@ -33,6 +37,8 @@ qset:
         id: null
         type: MC
         label: W
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about W?
@@ -45,6 +51,8 @@ qset:
         id: null
         type: MC
         label: X
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about X?
@@ -57,6 +65,8 @@ qset:
         id: null
         type: MC
         label: Y
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about Y?
@@ -69,6 +79,8 @@ qset:
         id: null
         type: MC
         label: Z
+        min: Min
+        max: Max
         questions:
           -
             text: How do you feel about Z?
