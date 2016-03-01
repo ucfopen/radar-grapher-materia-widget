@@ -105,6 +105,14 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', '$sanit
 				return false
 		return true
 
+	$scope.onQuestionImportComplete = (items) ->
+		for i in [0...items.length]
+			$scope.cards.push
+				question: items[i].questions[0].text
+				label: items[i].label
+				min: items[i].min
+				max: items[i].max
+
 	Materia.CreatorCore.start $scope
 ]
 
