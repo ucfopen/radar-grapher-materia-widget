@@ -10,9 +10,9 @@ Updated: 1/20/2016
 ###
 
 # Create an angular module to house our controller
-RadarGrapher = angular.module 'RadarGrapherCreator', ['ngMaterial', 'chart.js']
+RadarGrapher = angular.module 'RadarGrapherCreator', ['ngMaterial', 'chart.js', 'ngSanitize']
 
-RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope, $mdToast) ->
+RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', '$sanitize', 'Resource', ($scope, $mdToast, $sanitize, Resource) ->
 	$scope.widgetTitle = "My Radar Grapher Widget"
 
 	$scope.data = {
@@ -51,6 +51,7 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope
 			fillColor: "rgba(255,64,129, 0.5)"
 			data: dataArr
 		}
+		$scope.invalid = false
 
 	populateData()
 
@@ -85,7 +86,61 @@ RadarGrapher.controller 'RadarGrapherController', ['$scope', '$mdToast', ($scope
 				.hideDelay(3000)
 		)
 
+	$scope.onSaveClicked = (mode = 'save') ->
+		_isValid = $scope.validation()
+
+		if _isValid
+			qset = Resource.buildQset $sanitize($scope.widgetTitle), $scope.cards
+			if qset then Materia.CreatorCore.save $sanitize($scope.widgetTitle), qset
+		else
+			Materia.CreatorCore.cancelSave "Please make sure every question is complete"
+			return false
+
+	$scope.validation = ->
+		$scope.invalid = false
+
+		for card in $scope.cards
+			if !card.question or !card.label or !card.min or !card.max
+				$scope.invalid = true
+				return false
+		return true
+
 	Materia.CreatorCore.start $scope
+]
+
+RadarGrapher.factory 'Resource', ['$sanitize', ($sanitize) ->
+	buildQset: (title, questions) ->
+		qsetItems = []
+		qset = {}
+
+		if title is ''
+			# Materia.CreatorCore.cancelSave 'Please enter a title.'
+			return false
+
+		for question in questions
+			item = @processQsetItem question
+			if item then qsetItems.push item
+
+		qset.items = qsetItems
+		return qset
+
+	processQsetItem: (item, index) ->
+		question = $sanitize item.question
+		label = $sanitize item.label
+		min = $sanitize item.min
+		max = $sanitize item.max
+
+		materiaType: "question"
+		id: null
+		type: 'MC'
+		label: label
+		min: min
+		max: max
+		questions: [{ text: question }]
+		answers: [
+			text: '[No Answer]'
+			value: 0
+		]
 ]
 
 RadarGrapher.directive 'ngCircle', ->
