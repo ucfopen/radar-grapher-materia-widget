@@ -33,8 +33,8 @@
 		<!-- MAIN CREATOR SCRIPT -->
 		<script src="creator.js"></script>
 	</head>
-	<body ng-app="RadarGrapherCreator" ng-controller="RadarGrapherController">
-		<md-content id="container">
+	<body ng-app="RadarGrapherCreator">
+		<md-content id="container" ng-controller="RadarGrapherController">
 			<md-toolbar md-theme="toolbar-dark">
 				<div class="md-toolbar-tools">
 					<md-input-container class="md-block widget-title" flex>
@@ -44,10 +44,10 @@
 				</div>
 			</md-toolbar>
 			<div layout-gt-sm="row" layout="column" id="content">
-				<div flex="45" id="chart-container" layout="column" layout-align="center center">
+				<div flex="45" id="chart-container" layout="column">
 					<h2>Preview</h2>
 					<md-card class="md-whiteframe-3dp card" id="graph-container">
-						<canvas id="radar" class="chart" ng-circle></canvas>
+						<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
 					</md-card>
 				</div>
 				<div flex="55" id="card-container">
@@ -55,7 +55,7 @@
 						<div flex="25" class="card-left" layout layout-align="center center">
 							<md-input-container class="md-block">
 								<label>Axis Label</label>
-								<input ng-model="card.label" ng-change="updateLabels($index, card.label)">
+								<input ng-model="card.label" ng-change="updateLabels($index, card.label)" ng-class="{'error' : card.label.length > labelCharLimit}" label-limit-enforcer />
 							</md-input-container>
 						</div>
 						<div class="card-right" layout="column" flex>
@@ -69,7 +69,7 @@
 									<label>0% Label</label>
 									<input ng-model="card.min">
 								</md-input-container>
-								<md-slider flex min="0" max="100" aria-label="slider" ng-model="data.datasets[0].data[$index]"></md-slider>
+								<md-slider flex min="0" max="100" aria-label="slider" ng-model="data[0][$index]"></md-slider>
 								<md-input-container class="md-block" flex="25">
 									<label>100% Label</label>
 									<input ng-model="card.max">

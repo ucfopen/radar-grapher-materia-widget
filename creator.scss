@@ -29,7 +29,18 @@
 		padding-top: 64px;
 
 		#chart-container {
+			width: 100%;
 			max-height: 100%;
+
+			text-align: center;
+
+			#radar {
+				width: 100%;
+			}
+
+			h2 {
+				margin: 20px 0px 0px 0px;
+			}
 
 			@media (max-width: 960px) {
 				h2 {
@@ -40,6 +51,7 @@
 			}
 
 			.card {
+				margin: 20px;
 				padding: 25px;
 			}
 		}
@@ -74,6 +86,10 @@
 
 				md-input-container {
 					margin: 25px 5px 15px;
+
+					.error {
+						border-color: #FF0000;
+					}
 
 					.md-errors-spacer {
 						min-height: 0;
