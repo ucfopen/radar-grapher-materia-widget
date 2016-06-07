@@ -31,6 +31,12 @@ RadarGrapher.config ($mdThemingProvider) ->
 			.dark()
 
 RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, $compile, Resource) ->
+
+	$scope.removeHighlight = ->
+		console.log $scope.cards
+
+		# this.removeClass("highlight")
+
 	$scope.widgetTitle = "My Radar Grapher Widget"
 
 	$scope.data = [[]]
@@ -42,26 +48,38 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	# $scope.charLimitRegex = /^[A-Za-z0-9 ]{1,24}$/
 
 	# Input data for each question. Start with samples of 3.
-	$scope.cards = [
-		{
-			'question': 'Question 1'
-			'label': 'Label 1'
-			'min': 'Min 1'
-			'max': 'Max 1'
-		}
-		{
-			'question': 'Question 2'
-			'label': 'Label 2'
-			'min': 'Min 2'
-			'max': 'Max 2'
-		}
-		{
-			'question': 'Question 3'
-			'label': 'Label 3'
-			'min': 'Min 3'
-			'max': 'Max 3'
-		}
-	]
+	# $scope.cards = [
+	# 	{
+	# 		'question': 'Question 1'
+	# 		'label': 'Label 1'
+	# 		'min': 'Min'
+	# 		'max': 'Max'
+	# 	}
+	# 	{
+	# 		'question': 'Question 2'
+	# 		'label': 'Label 2'
+	# 		'min': 'Min'
+	# 		'max': 'Max'
+	# 	}
+	# 	{
+	# 		'question': 'Question 3'
+	# 		'label': 'Label 3'
+	# 		'min': 'Min'
+	# 		'max': 'Max'
+	# 	}
+	# ]
+
+	$scope.cards = []
+
+	$scope.setup = ->
+		$scope.addQuestion()
+		$scope.addQuestion()
+		$scope.addQuestion()
+
+
+	# Track the total question count, so labels and questions do not repeat
+	# if one is deleted.
+	questionCount = 0
 
 	populateData = ->
 
@@ -83,10 +101,16 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 		if $scope.cards.length >= 10
 			$scope.showToast("Maximum of 10 questions reached")
 			return
-
+		questionCount++
 		newIndex = $scope.cards.length + 1
-		$scope.cards.push {}
-		$scope.labels.push ''
+		# $scope.cards.push {}
+		$scope.cards.push {
+			'question': 'Question '+questionCount
+			'label': 'Label '+questionCount
+			'min': 'Min'
+			'max': 'Max'
+		}
+		$scope.labels.push 'Label '+questionCount
 		$scope.data[0].push 0
 
 	$scope.deleteQuestion = (index) ->

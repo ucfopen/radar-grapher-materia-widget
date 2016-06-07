@@ -50,7 +50,7 @@
 						<div flex="15" layout layout-align="center center">
 							<span class="md-body-1">{{question.min}}</span>
 						</div>
-						<md-slider flex min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
+						<md-slider flex step="1" min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
 						</md-slider>
 						<div flex="15" layout layout-align="center center">
 							<span class="md-body-1">{{question.max}}</span>
@@ -63,7 +63,8 @@
 			</section>
 			<section class="graph-output" ng-if="!inProgress">
 				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
-				<canvas id="sibling"></canvas>
+				<canvas id="outer-wheel"></canvas>
+				<!-- <canvas id="myChart" width="400" height="400"></canvas> -->
 			</section>
 		</md-content>
 	</body>

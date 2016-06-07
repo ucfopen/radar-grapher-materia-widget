@@ -68,31 +68,35 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 	# Add 20 to each response to make room for the circle in the center of the graph.
 	_padResponses = ->
+		console.log $scope.responses
 		for response, i in $scope.responses
 			# $scope.responses[i] = if response < 90 then response + 10 else response
-			$scope.responses[i] = ($scope.responses[i] * 0.8) + 10
+			$scope.responses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
 
 	$scope.$on 'create', (evt, chart) ->
+		console.log 'create happened'
+		console.log evt
+		console.log chart
 
 		radar = document.getElementById 'radar'
 
-		sibling = document.getElementById 'sibling'
+		wheel = document.getElementById 'outer-wheel'
 
 		radarWidth = 800
 		radarHeight = 500
 
-		sibling.width = radarWidth
-		sibling.height = radarHeight
+		wheel.width = radarWidth
+		wheel.height = radarHeight
 
-		ctx = sibling.getContext '2d'
+		ctx = wheel.getContext '2d'
 		ctx.fillStyle = '#d5d5d5'
 		ctx.strokeStyle = '#d5d5d5'
 		ctx.beginPath()
 		ctx.lineWidth = 20
 
-		console.log sibling.width
-		console.log sibling.height
+		console.log wheel.width
+		console.log wheel.height
 
 		ctx.arc (radarWidth / 2), (radarHeight / 2), 218, 0, 2 * Math.PI
 		ctx.stroke()
@@ -111,6 +115,24 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		# 	ctx.lineTo (400 * Math.cos(thisAngle) + 230 * Math.sin(thisAngle)), (-400 * Math.sin(thisAngle) + 230 * Math.cos(thisAngle))
 		# 	# ctx.lineTo (218 * Math.sin(angle * i+1)), (218 * Math.cos(angle * i+1))
 		# 	ctx.stroke()
+
+		# chartx = document.getElementById("myChart").getContext("2d");
+
+		# data = {
+		# 	labels: []
+		# 	datasets: [
+		# 		{
+		# 			label: "",
+		# 			data: []
+		# 		}
+		# 	]
+		# }
+
+		# myRadarChard = new Chart(chartx, {
+		# 	type: 'radar',
+		# 	data: data,
+		# 	options: options
+		# });
 
 
 	Materia.Engine.start($scope)
