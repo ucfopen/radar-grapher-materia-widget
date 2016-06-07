@@ -77,15 +77,15 @@
 								<md-input-container class="md-block" flex="25">
 									<label>0% Label</label>
 									<input 
-										class="highlight" 
-										ng-model="card.min">
+										ng-model="card.min"
+										ng-class="{'highlight': card.min == 'Min'}">
 								</md-input-container>
 								<md-slider flex min="0" max="100" aria-label="slider" ng-model="data[0][$index]"></md-slider>
 								<md-input-container class="md-block" flex="25">
 									<label>100% Label</label>
 									<input 
-										class="highlight" 
-										ng-model="card.max">
+										ng-model="card.max"
+										ng-class="{'highlight': card.max == 'Max'}">
 								</md-input-container>
 							</div>
 						</div>
