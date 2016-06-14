@@ -136,6 +136,7 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 		_isValid = $scope.validation()
 
 		if _isValid
+			console.log "saving qset"
 			qset = Resource.buildQset $sanitize($scope.widgetTitle), $scope.cards
 			if qset then Materia.CreatorCore.save $sanitize($scope.widgetTitle), qset
 		else
