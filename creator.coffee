@@ -32,11 +32,6 @@ RadarGrapher.config ($mdThemingProvider) ->
 
 RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, $compile, Resource) ->
 
-	$scope.removeHighlight = ->
-		console.log $scope.cards
-
-		# this.removeClass("highlight")
-
 	$scope.widgetTitle = "My Radar Grapher Widget"
 
 	$scope.data = [[]]
@@ -47,35 +42,28 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	$scope.labelCharLimit = 24
 	# $scope.charLimitRegex = /^[A-Za-z0-9 ]{1,24}$/
 
-	# Input data for each question. Start with samples of 3.
-	# $scope.cards = [
-	# 	{
-	# 		'question': 'Question 1'
-	# 		'label': 'Label 1'
-	# 		'min': 'Min'
-	# 		'max': 'Max'
-	# 	}
-	# 	{
-	# 		'question': 'Question 2'
-	# 		'label': 'Label 2'
-	# 		'min': 'Min'
-	# 		'max': 'Max'
-	# 	}
-	# 	{
-	# 		'question': 'Question 3'
-	# 		'label': 'Label 3'
-	# 		'min': 'Min'
-	# 		'max': 'Max'
-	# 	}
-	# ]
-
 	$scope.cards = []
+
+
+	### Materia Interface Methods ###
+
+	$scope.initNewWidget = (widget, baseUrl) -> true
+
+	$scope.onSaveComplete = (title, widget, qset, version) -> true
+
+	$scope.onQuestionImportComplete = (items) -> true
+
+	$scope.onMediaImportComplete  = (media) -> null
+
+	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) -> true
+
+	$scope.onSaveClicked = (mode = 'save') -> true
+
 
 	$scope.setup = ->
 		$scope.addQuestion()
 		$scope.addQuestion()
 		$scope.addQuestion()
-
 
 	# Track the total question count, so labels and questions do not repeat
 	# if one is deleted.
@@ -188,9 +176,11 @@ RadarGrapher.factory 'Resource', ($sanitize) ->
 		materiaType: "question"
 		id: null
 		type: 'MC'
-		label: label
-		min: min
-		max: max
+		options: {
+			label: label
+			min: min
+			max: max
+		}
 		questions: [{ text: question }]
 		answers: [
 			text: '[No Answer]'

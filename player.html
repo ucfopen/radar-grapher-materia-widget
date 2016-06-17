@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
 		<link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.css">
 		<link rel="stylesheet" type="text/css" href="player.css">
-		<link rel="stylesheet" type="text/css" href="print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="print.css">
 
 		<!-- REQUIRED MATERIA JAVASCRIPT -->
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -34,6 +34,20 @@
 
 		<!-- MAIN WIDGET SCRIPT -->
 		<script src="player.js"></script>
+
+		<script>
+			function printDiv(divName) {
+
+			    var printContents = document.getElementById(divName).innerHTML;
+			    var originalContents = document.body.innerHTML;
+
+			    document.body.innerHTML = printContents;
+
+			    window.print();
+
+			    document.body.innerHTML = originalContents;
+			}
+		</script>
 	</head>
 	<body ng-app="RadarGrapherEngine" ng-controller="RadarGrapherEngineCtrl" ng-cloak>
 		<md-content id="container">
@@ -49,12 +63,12 @@
 					</md-card-title>
 					<md-card-actions layout>
 						<div flex="15" layout layout-align="center center">
-							<span class="md-body-1">{{question.min}}</span>
+							<span class="md-body-1">{{question.options.min}}</span>
 						</div>
 						<md-slider flex step="1" min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
 						</md-slider>
 						<div flex="15" layout layout-align="center center">
-							<span class="md-body-1">{{question.max}}</span>
+							<span class="md-body-1">{{question.options.max}}</span>
 						</div>
 					</md-card-actions>
 				</md-card>
@@ -63,10 +77,14 @@
 				</section>
 			</section>
 			<section class="graph-output" ng-if="!inProgress">
-				<div class="cover"></div>
-				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
-				<canvas id="outer-wheel"></canvas>
-				<!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+				<div class="myDivToPrint" id="printableArea">
+					<p>hello</p>
+					<!-- <div class="cover"></div> -->
+					<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
+					<canvas id="outer-wheel"></canvas>
+					<!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+					<input type="button" onclick="printDiv('printableArea')" value="print a div!" />
+				</div>
 			</section>
 		</md-content>
 	</body>

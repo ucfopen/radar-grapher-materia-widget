@@ -8,9 +8,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: U
-        min: Min
-        max: Max
+        options:
+          label: 'U'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about U?
@@ -22,9 +23,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: V
-        min: Min
-        max: Max
+        options:
+          label: 'V'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about V?
@@ -36,9 +38,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: W
-        min: Min
-        max: Max
+        options:
+          label: 'W'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about W?
@@ -50,9 +53,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: X
-        min: Min
-        max: Max
+        options:
+          label: 'X'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about X?
@@ -64,9 +68,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: Y
-        min: Min
-        max: Max
+        options:
+          label: 'Y'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about Y?
@@ -78,9 +83,10 @@ qset:
         materiaType: question
         id: null
         type: MC
-        label: Z
-        min: Min
-        max: Max
+        options:
+          label: 'Z'
+          min: Min
+          max: Max
         questions:
           -
             text: How do you feel about Z?
