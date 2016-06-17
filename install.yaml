@@ -17,8 +17,12 @@ files:
   flash_version: 0
 score:
   is_scorable: No
-  score_module: ReactingWhileDriving
+  score_module: RadarGrapher
 meta_data:
+  features:
+    - Customizable
+  supported_data:
+    - Custom
   about: >
     Student rates multiple subjects along a slider input 
     results are displayed to student in the form of a 
