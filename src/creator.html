@@ -59,16 +59,16 @@
 					</md-card>
 				</div>
 				<div flex="55" id="card-container" ng-init="setup()">
-					<md-card class="md-whiteframe-3dp card" 
-						ng-repeat="card in cards" 
+					<md-card class="md-whiteframe-3dp card"
+						ng-repeat="card in cards"
 						layout="row"
 						ng-init="thisIndex = $index + 1">
 						<div flex="25" class="card-left" layout layout-align="center center">
 							<md-input-container class="md-block">
 								<label>Axis Label</label>
-								<input 
-									ng-model="card.label" 
-									ng-change="updateLabels($index, card.label)" 
+								<input
+									ng-model="card.label"
+									ng-change="updateLabels($index, card.label)"
 									ng-class="{'error' : card.label.length > labelCharLimit, 'highlight': card.label == 'Label '+thisIndex}"
 									label-limit-enforcer />
 							</md-input-container>
@@ -77,21 +77,21 @@
 							<button class="delete" ng-click="deleteQuestion($index)">×</button>
 							<md-input-container class="md-block">
 								<label>Question</label>
-								<input 
+								<input
 									ng-model="card.question"
 									ng-class="{'highlight': card.question == 'Question '+thisIndex}">
 							</md-input-container>
 							<div layout="row">
 								<md-input-container class="md-block" flex="25">
 									<label>0% Label</label>
-									<input 
+									<input
 										ng-model="card.min"
 										ng-class="{'highlight': card.min == 'Min'}">
 								</md-input-container>
 								<md-slider flex min="0" max="100" aria-label="slider" ng-model="data[0][$index]"></md-slider>
 								<md-input-container class="md-block" flex="25">
 									<label>100% Label</label>
-									<input 
+									<input
 										ng-model="card.max"
 										ng-class="{'highlight': card.max == 'Max'}">
 								</md-input-container>
