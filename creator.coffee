@@ -39,7 +39,7 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 
 	$scope.fillColor = 'rgba(255,64,129, 0.5)'
 
-	$scope.labelCharLimit = 24
+	$scope.labelCharLimit = 18
 	# $scope.charLimitRegex = /^[A-Za-z0-9 ]{1,24}$/
 
 	$scope.cards = []
