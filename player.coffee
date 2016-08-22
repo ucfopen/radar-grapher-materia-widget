@@ -82,7 +82,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx.beginPath()
 		ctx.lineWidth = 20
 
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 218, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2), 220, 0, 2 * Math.PI
 		ctx.stroke()
 
 		ctx.beginPath()
