@@ -33,6 +33,19 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 	$scope.qset = null
 	$scope.instance = null
 	$scope.responses = []
+	$scope.paddedResponses = []
+
+	$scope.printResults = ->
+		window.print()
+
+	$scope.adjustResponses = ->
+		return $scope.inProgress = !$scope.inProgress
+
+	$scope.initResponse = (index) ->
+		if $scope.responses[index] == undefined
+			return $scope.responses[index] = 0
+		else
+			return $scope.responses[index]
 
 	# Chart data. Includes the labels.
 	# The chart can handle more than one set of data, but we will only use one.
@@ -52,7 +65,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 	$scope.submit = ->
 		_padResponses()
-		$scope.data[0] = $scope.responses
+		$scope.data[0] = $scope.paddedResponses
 
 		# Change the screen from questions to chart
 		$scope.inProgress = false
@@ -61,8 +74,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 	_padResponses = ->
 		for response, i in $scope.responses
 			# $scope.responses[i] = if response < 90 then response + 10 else response
-			$scope.responses[i] = Math.floor($scope.responses[i] * 0.8) + 10
-
+			$scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
 	$scope.$on 'create', (evt, chart) ->
 
