@@ -22,7 +22,7 @@ RadarGrapher.config ['ChartJsProvider', (ChartJsProvider) ->
 			pointDotRadius: 2
 			pointDotStrokeWidth: 0.1
 			responsive: false
-			angleLineWidth : 8
+			angleLineWidth : 5
 			angleLineColor: '#d5d5d5'
 		}
 	]
@@ -37,6 +37,32 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 	$scope.printResults = ->
 		window.print()
+
+	$scope.graphToImage = ($event) ->
+		image = new Image
+		# Used to keep the permanent canvas untouched
+		tempCanvas = document.createElement "canvas"
+
+		# These two elements must be combined to make a single image
+		wheel = document.getElementById 'outer-wheel'
+		radar = document.getElementById 'radar'
+
+		tempCanvas.width = wheel.width + 40
+		tempCanvas.height = wheel.height + 40
+
+		context = tempCanvas.getContext '2d'
+
+		# Fills background to be white
+		context.fillStyle = 'white'
+		context.fillRect 0, 0, tempCanvas.width, tempCanvas.height
+
+		context.drawImage wheel, 0, 20
+		context.drawImage radar, 0, 20
+
+		image = tempCanvas.toDataURL("image/png")
+
+		$event.currentTarget.href = image
+		$event.currentTarget.download = 'test.png'
 
 	$scope.adjustResponses = ->
 		return $scope.inProgress = !$scope.inProgress
@@ -77,13 +103,11 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 			$scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
 	$scope.$on 'create', (evt, chart) ->
-
 		radar = document.getElementById 'radar'
-
 		wheel = document.getElementById 'outer-wheel'
 
-		radarWidth = 800
-		radarHeight = 500
+		radarWidth = radar.width
+		radarHeight = radar.height
 
 		wheel.width = radarWidth
 		wheel.height = radarHeight
@@ -91,14 +115,28 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx = wheel.getContext '2d'
 		ctx.fillStyle = '#d5d5d5'
 		ctx.strokeStyle = '#d5d5d5'
-		ctx.beginPath()
-		ctx.lineWidth = 20
+		ctx.lineWidth = 10
 
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 220, 0, 2 * Math.PI
+		# radius of circles used to generate rings
+		i = 457
+
+		# border of radar graph
+		ctx.beginPath()
+		ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
 		ctx.stroke()
 
+		while i > 107
+			# Distance between each reference circle
+			i -= 107
+
+			# generates rings on the radar graph to give user context
+			ctx.beginPath()
+			ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
+			ctx.stroke()
+
+		# center of the radar graph
 		ctx.beginPath()
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 20, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2), 50, 0, 2 * Math.PI
 		ctx.fill()
 
 
