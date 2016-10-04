@@ -97,13 +97,19 @@ h1.md-headline {
 .icon-print{
 	position: absolute;
 	top: 13px;
-	right: 40px;
+	right: 70px;
 }
 
 .icon-return{
 	position: absolute;
 	top: 13px;
 	right: 10px;
+}
+
+.icon-image{
+	position: absolute;
+	top: 13px;
+	right: 40px;
 }
 
 @media print {
