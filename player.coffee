@@ -34,6 +34,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 	$scope.instance = null
 	$scope.responses = []
 	$scope.paddedResponses = []
+	$scope.referenceLinesToggled
 
 	$scope.printResults = ->
 		window.print()
@@ -73,6 +74,35 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		else
 			return $scope.responses[index]
 
+	$scope.toggleReferenceLines = ->
+		$scope.referenceLinesToggled = !$scope.referenceLinesToggled
+
+		if $scope.referenceLinesToggled
+			radar = document.getElementById 'radar'
+			wheel = document.getElementById 'outer-wheel'
+
+			radarWidth = radar.width
+			radarHeight = radar.height
+
+			ctx = wheel.getContext '2d'
+			ctx.fillStyle = '#d5d5d5'
+			ctx.strokeStyle = '#d5d5d5'
+			ctx.lineWidth = 10
+
+			i = 350
+
+			while i > 107
+				# Distance between each reference circle
+
+				# generates rings on the radar graph to give user context
+				ctx.beginPath()
+				ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
+				ctx.stroke()
+
+				i -= 107
+		else
+			_drawOuterWheel()
+
 	# Chart data. Includes the labels.
 	# The chart can handle more than one set of data, but we will only use one.
 
@@ -95,6 +125,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 		# Change the screen from questions to chart
 		$scope.inProgress = false
+		$scope.referenceLinesToggled = false
 
 	# Add 20 to each response to make room for the circle in the center of the graph.
 	_padResponses = ->
@@ -102,7 +133,8 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 			# $scope.responses[i] = if response < 90 then response + 10 else response
 			$scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
-	$scope.$on 'create', (evt, chart) ->
+	# Draws the wheel that acts as a backdrop to the radar graph
+	_drawOuterWheel = ->
 		radar = document.getElementById 'radar'
 		wheel = document.getElementById 'outer-wheel'
 
@@ -117,27 +149,17 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx.strokeStyle = '#d5d5d5'
 		ctx.lineWidth = 10
 
-		# radius of circles used to generate rings
-		i = 457
-
-		# border of radar graph
 		ctx.beginPath()
-		ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2), 457, 0, 2 * Math.PI
 		ctx.stroke()
-
-		while i > 107
-			# Distance between each reference circle
-			i -= 107
-
-			# generates rings on the radar graph to give user context
-			ctx.beginPath()
-			ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
-			ctx.stroke()
 
 		# center of the radar graph
 		ctx.beginPath()
 		ctx.arc (radarWidth / 2), (radarHeight / 2), 50, 0, 2 * Math.PI
 		ctx.fill()
+
+	$scope.$on 'create', (evt, chart) ->
+		_drawOuterWheel()
 
 
 	Materia.Engine.start($scope)

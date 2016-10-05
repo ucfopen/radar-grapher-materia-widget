@@ -40,6 +40,8 @@
 			<md-toolbar>
 				<div class="md-toolbar-tools">
 					<h2>{{instance.name}}</h2>
+					<span ng-if="!inProgress && referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-off non-printable" title="Turn Off Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
+					<span ng-if="!inProgress && !referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-on non-printable" title="Turn On Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
 					<span ng-if="!inProgress" ng-click="printResults()" class="icon-print non-printable" title="Print"></span>
 					<a ng-if="!inProgress" ng-click="graphToImage($event)" class="icon-image non-printable" title="Download Graph as Image"></a>
 					<span ng-if="!inProgress" ng-click="adjustResponses()" class="icon-return non-printable" title="Adjust Responses"></span>
