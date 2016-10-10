@@ -56,6 +56,10 @@
 
 .md-toolbar-tools h2 {
 	margin-left: 5px;
+	width: 70%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
 }
 
 .card {
@@ -68,8 +72,10 @@
 	.cover {
 		height: 100%;
 		width: 100%;
+		padding: 21px;
 		z-index: 110;
 		position: absolute;
+		box-sizing: border-box;
 	}
 }
 
@@ -124,15 +130,13 @@ h1.md-headline {
 }
 
 .icon-toggle{
-	position: absolute;
-	top: 13px;
-	right: 165px;
+	position: relative;
 	text-transform: uppercase;
 }
 
 .modified-font{
 	font-family: sans-serif;
-	font-size: 0.85em;
+	font-size: .92em;
 }
 
 @media print {
