@@ -87,19 +87,19 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 			ctx = wheel.getContext '2d'
 			ctx.fillStyle = '#d5d5d5'
 			ctx.strokeStyle = '#d5d5d5'
-			ctx.lineWidth = 10
+			ctx.lineWidth = radarHeight / 150
 
-			i = 350
+			i = 0
 
-			while i > 107
+			while i <= radarHeight / 2.2
 				# Distance between each reference circle
 
 				# generates rings on the radar graph to give user context
 				ctx.beginPath()
-				ctx.arc (radarWidth / 2), (radarHeight / 2), i, 0, 2 * Math.PI
+				ctx.arc (radarWidth / 2), (radarHeight / 2), radarHeight / 2.2 - i, 0, 2 * Math.PI
 				ctx.stroke()
 
-				i -= 107
+				i += radarHeight / 9
 		else
 			_drawOuterWheel()
 
@@ -134,6 +134,8 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 			$scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
 	# Draws the wheel that acts as a backdrop to the radar graph
+	# 	All values for outer wheel are based off of the values of the radar to
+	#		aid in scaling
 	_drawOuterWheel = ->
 		radar = document.getElementById 'radar'
 		wheel = document.getElementById 'outer-wheel'
@@ -147,7 +149,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx = wheel.getContext '2d'
 		ctx.fillStyle = '#d5d5d5'
 		ctx.strokeStyle = '#d5d5d5'
-		ctx.lineWidth = radarWidth/150 
+		ctx.lineWidth = radarWidth / 150
 
 		ctx.beginPath()
 		ctx.arc (radarWidth / 2), (radarHeight / 2), radarHeight / 2.2, 0, 2 * Math.PI
