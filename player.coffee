@@ -147,15 +147,15 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx = wheel.getContext '2d'
 		ctx.fillStyle = '#d5d5d5'
 		ctx.strokeStyle = '#d5d5d5'
-		ctx.lineWidth = 10
+		ctx.lineWidth = radarWidth/150 
 
 		ctx.beginPath()
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 457, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2), radarHeight / 2.2, 0, 2 * Math.PI
 		ctx.stroke()
 
 		# center of the radar graph
 		ctx.beginPath()
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 50, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2),radarHeight/20, 0, 2 * Math.PI
 		ctx.fill()
 
 	$scope.$on 'create', (evt, chart) ->
