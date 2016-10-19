@@ -68,7 +68,6 @@
 
 .graph-output {
 	position: relative;
-
 	.cover {
 		height: 100%;
 		width: 100%;
@@ -142,5 +141,11 @@ h1.md-headline {
 @media print {
 	.non-printable{
 		display: none;
+	}
+
+	// Centers Graph on Print page
+	.graph-output {
+		right: 50px;
+		overflow:hidden;
 	}
 }
