@@ -94,6 +94,6 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 ]
 
 
-RadarGrapher.controller 'PrintController', ['$scope', ($scope) ->
-
-]
+#RadarGrapher.controller 'PrintController', ['$scope', ($scope) ->
+#
+#]
