@@ -5,7 +5,7 @@ general:
   height: 600
   width: 800
   in_catalog: No
-  is_editable: No
+  is_editable: Yes
   is_playable: Yes
   is_qset_encrypted: Yes
   is_answer_encrypted: Yes
@@ -24,10 +24,10 @@ meta_data:
   supported_data:
     - Custom
   about: >
-    Student rates multiple subjects along a slider input 
-    results are displayed to student in the form of a 
-    radar graph.
+    A tool for creating custom radar charts. Specify topics for each axis;
+    students respond to each via sliders, and the results are displayed in
+    the form of a printable chart.
   excerpt: >
-    Student rates multiple subjects along a slider input 
-    results are displayed to student in the form of a 
-    radar graph.
+    A tool for creating custom radar charts. Specify topics for each axis;
+    students respond to each via sliders, and the results are displayed in
+    the form of a printable chart.
