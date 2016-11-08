@@ -40,25 +40,8 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	$scope.fillColor = 'rgba(255,64,129, 0.5)'
 
 	$scope.labelCharLimit = 18
-	# $scope.charLimitRegex = /^[A-Za-z0-9 ]{1,24}$/
 
 	$scope.cards = []
-
-
-	### Materia Interface Methods ###
-
-	$scope.initNewWidget = (widget, baseUrl) -> true
-
-	$scope.onSaveComplete = (title, widget, qset, version) -> true
-
-	$scope.onQuestionImportComplete = (items) -> true
-
-	$scope.onMediaImportComplete  = (media) -> null
-
-	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) -> true
-
-	$scope.onSaveClicked = (mode = 'save') -> true
-
 
 	$scope.setup = ->
 		$scope.addQuestion()
@@ -69,20 +52,6 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	# if one is deleted.
 	questionCount = 0
 
-	populateData = ->
-
-		for card in $scope.cards
-			$scope.labels.push card.label
-			$scope.data[0].push 0
-
-		$scope.invalid = false
-
-	populateData()
-
-	# $scope.$on 'update', (evt, chart) ->
-
-	# $scope.$on 'create', (evt, chart) ->
-
 	# Add new	questions when the plus button is clicked as long as there are
 	# less than 10 questions.
 	$scope.addQuestion = ->
@@ -90,8 +59,6 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 			$scope.showToast("Maximum of 10 questions reached")
 			return
 		questionCount++
-		newIndex = $scope.cards.length + 1
-		# $scope.cards.push {}
 		$scope.cards.push {
 			'question': 'Question '+questionCount
 			'label': 'Label '+questionCount
@@ -120,11 +87,10 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 				.hideDelay(3000)
 		)
 
-	$scope.onSaveClicked = (mode = 'save') ->
+	$scope.onSaveClicked = ->
 		_isValid = $scope.validation()
 
 		if _isValid
-			console.log "saving qset"
 			qset = Resource.buildQset $sanitize($scope.widgetTitle), $scope.cards
 			if qset then Materia.CreatorCore.save $sanitize($scope.widgetTitle), qset
 		else
@@ -144,11 +110,10 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 		for i in [0...items.length]
 			$scope.cards.push
 				question: items[i].questions[0].text
-				label: items[i].label
-				min: items[i].min
-				max: items[i].max
+				label: items[i].options.label
+				min: items[i].options.min
+				max: items[i].options.max
 
-	# console.log RadarGrapher
 	Materia.CreatorCore.start $scope
 
 RadarGrapher.factory 'Resource', ($sanitize) ->

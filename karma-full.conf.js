@@ -40,7 +40,7 @@ module.exports = function(config) {
             // 'build/*.js': ['coverage', 'eslint']
             'build/player.js': ['coverage', 'eslint'],
             'build/creator.js': ['coverage', 'eslint'],
-            'build/demo.json': ['json_fixtures'],
+            'build/demo.json': ['json_fixtures']
         },
 
         //plugin-specific configurations
