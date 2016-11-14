@@ -32,7 +32,7 @@ RadarGrapher.config ($mdThemingProvider) ->
 
 RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, $compile, Resource) ->
 
-	$scope.widgetTitle = "My Radar Grapher Widget"
+	$scope.title = "My Radar Grapher Widget"
 
 	$scope.data = [[]]
 	$scope.labels = []
@@ -43,14 +43,40 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 
 	$scope.cards = []
 
-	$scope.setup = ->
+	# Track the total question count, so labels and questions do not repeat
+	# if one is deleted.
+	questionCount = 0
+
+	$scope.initNewWidget = (widget) ->
+		$scope.$apply ->
+			setup()
+
+	$scope.initExistingWidget = (title,widget,qset) ->
+
+		$scope.$apply ->
+			$scope.title = title
+			for item in qset.items
+				$scope.cards.push
+					question: item.questions[0].text
+					label: item.options.label
+					min: item.options.min
+					max: item.options.max
+
+				questionCount++
+
+			populateData()
+
+	setup = ->
 		$scope.addQuestion()
 		$scope.addQuestion()
 		$scope.addQuestion()
 
-	# Track the total question count, so labels and questions do not repeat
-	# if one is deleted.
-	questionCount = 0
+	populateData = ->
+		for card in $scope.cards
+			$scope.labels.push card.label
+			$scope.data[0].push 0
+
+		$scope.invalid = false
 
 	# Add new	questions when the plus button is clicked as long as there are
 	# less than 10 questions.
@@ -91,8 +117,8 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 		_isValid = $scope.validation()
 
 		if _isValid
-			qset = Resource.buildQset $sanitize($scope.widgetTitle), $scope.cards
-			if qset then Materia.CreatorCore.save $sanitize($scope.widgetTitle), qset
+			qset = Resource.buildQset $sanitize($scope.title), $scope.cards
+			if qset then Materia.CreatorCore.save $sanitize($scope.title), qset
 		else
 			Materia.CreatorCore.cancelSave "Please make sure every question is complete"
 			return false

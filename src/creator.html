@@ -6,7 +6,7 @@
 
 		<!-- STYLESHEETS -->
 		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-		<link rel="stylesheet" href="angular-chart.min.css">
+		<link rel="stylesheet" href="assets/angular-chart.min.css">
 		<link rel="stylesheet" type="text/css" href="creator.css">
 
 		<!-- REQUIRED MATERIA JAVASCRIPT -->
@@ -32,7 +32,7 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 		<!-- ANGULAR CHART -->
-		<script src="angular-chart.min.js"></script>
+		<script src="assets/angular-chart.min.js"></script>
 
 		<!-- ANGULAR SANITIZE -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-sanitize.min.js"></script>
@@ -46,7 +46,7 @@
 				<div class="md-toolbar-tools">
 					<md-input-container class="md-block widget-title" flex>
 						<label id="widget-title-label">Widget Name</label>
-						<input ng-model="widgetTitle">
+						<input ng-model="title">
 					</md-input-container>
 				</div>
 			</md-toolbar>
@@ -58,7 +58,7 @@
 						<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
 					</md-card>
 				</div>
-				<div flex="55" id="card-container" ng-init="setup()">
+				<div flex="55" id="card-container">
 					<md-card class="md-whiteframe-3dp card"
 						ng-repeat="card in cards"
 						layout="row"

@@ -24,7 +24,7 @@ describe('radar module', function () {
 			$scope.start(widgetInfo, qset.data);
 			expect(widgetInfo.name).toBe('Radar Grapher');
 			//make sure the items include there are 6 items (U-Z)
-			expect(qset.data.items.length).toEqual(6);
+			expect(qset.data.items.length).toBe(6);
 			//make sure the the correct type of options are used
 			expect(qset.data.items[0].options.label).toBeDefined();
 			expect(qset.data.items[0].options.min).toBeDefined();
@@ -54,14 +54,14 @@ describe('radar module', function () {
 			//we fire the create event which is caught in the player controller
 			$scope.$emit('create');
 			//we expect the canvas elements to be set up correctly
-			expect(document.getElementById('outer-wheel').width).toEqual(800);
-			expect(document.getElementById('outer-wheel').height).toEqual(500);
+			expect(document.getElementById('outer-wheel').width).toBe(800);
+			expect(document.getElementById('outer-wheel').height).toBe(500);
 			//this is needed for canvas specific properties
 			var ctx = document.getElementById("outer-wheel").getContext("2d");
 			// var ctx = canvas.getContext("2d");
-			expect(ctx.fillStyle).toEqual('#d5d5d5');
-			expect(ctx.strokeStyle).toEqual('#d5d5d5');
-			expect(ctx.lineWidth).toEqual(20);
+			expect(ctx.fillStyle).toBe('#d5d5d5');
+			expect(ctx.strokeStyle).toBe('#d5d5d5');
+			expect(ctx.lineWidth).toBe(20);
 		});
 	});
 
@@ -85,27 +85,40 @@ describe('radar module', function () {
 		});
 
 		it('should have initial variables declared' , function() {
-			expect($scope.widgetTitle).toEqual("My Radar Grapher Widget");
+			expect($scope.title).toBe("My Radar Grapher Widget");
 			expect($scope.data).toEqual([[]]);
 			expect($scope.labels).toEqual([]);
-			expect($scope.fillColor).toEqual('rgba(255,64,129, 0.5)');
-			expect($scope.labelCharLimit).toEqual(18);
+			expect($scope.fillColor).toBe('rgba(255,64,129, 0.5)');
+			expect($scope.labelCharLimit).toBe(18);
 			expect($scope.cards).toEqual([]);
 		});
 
 		it('should properly start and add questions', function(){
-			$scope.setup();
+			$scope.initNewWidget();
 			expect($scope.addQuestion).toHaveBeenCalledTimes(3);
-			expect($scope.cards.length).toEqual(3);
+			expect($scope.cards.length).toBe(3);
 			//Make sure addQuestion worked properly
 			for (var i=1; i <= $scope.cards.length ; i++) {
-				expect($scope.cards[i-1].question).toEqual('Question '+ i);
-				expect($scope.cards[i-1].label).toEqual('Label '+ i);
-				expect($scope.cards[i-1].min).toEqual('Min');
-				expect($scope.cards[i-1].max).toEqual('Max');
-				expect($scope.labels[i-1]).toEqual('Label '+ i);
+				expect($scope.cards[i-1].question).toBe('Question '+ i);
+				expect($scope.cards[i-1].label).toBe('Label '+ i);
+				expect($scope.cards[i-1].min).toBe('Min');
+				expect($scope.cards[i-1].max).toBe('Max');
+				expect($scope.labels[i-1]).toBe('Label '+ i);
 			}
-			expect($scope.data[0].length).toEqual(3);
+			expect($scope.data[0].length).toBe(3);
+		});
+
+		it('should initExisting Widget', function () {
+			$scope.initExistingWidget(widgetInfo.name, widgetInfo, qset.data);
+			expect($scope.title).toBe(widgetInfo.name);
+			expect($scope.cards[0].question).toBe("How do you feel about U?");
+			expect($scope.cards[0].label).toBe("U");
+			expect($scope.cards[0].min).toBe("Min");
+			expect($scope.cards[0].max).toBe("Max");
+			//expect populateData to have worked
+			expect($scope.labels[0]).toBe("U");
+			//6 numbers (U,V,W,X,Y,Z)
+			expect($scope.data[0]).toEqual([0,0,0,0,0,0]);
 		});
 
 		it('should only allow up to ten questions', function(){
@@ -120,17 +133,17 @@ describe('radar module', function () {
 				$scope.addQuestion();
 			}
 			$scope.deleteQuestion();
-			expect($scope.cards.length).toEqual(3);
+			expect($scope.cards.length).toBe(3);
 		});
 
 		it('should update labels', function(){
-			$scope.setup();
+			$scope.initNewWidget();
 			$scope.updateLabels(0, 'changed');
-			expect($scope.labels[0]).toEqual('changed');
+			expect($scope.labels[0]).toBe('changed');
 		});
 
 		it('should not allow less than 3 questions', function(){
-			$scope.setup();
+			$scope.initNewWidget();
 			$scope.deleteQuestion();
 			expect($scope.showToast).toHaveBeenCalledWith("Minimum of 3 questions reached");
 		});
@@ -162,7 +175,7 @@ describe('radar module', function () {
 
 		it('should save the widget properly', function(){
 			//since we're spying on this, it should return an object with a title and a qset if it determines the widget is ready to save
-			$scope.setup();
+			$scope.initNewWidget();
 			var successReport = $scope.onSaveClicked();
 			//make sure the title was sent correctly
 			expect(successReport.title).toBe('My Radar Grapher Widget');
@@ -175,15 +188,15 @@ describe('radar module', function () {
 		});
 
 		it('should cancel saving if a property does not exist', function(){
-			$scope.setup();
+			$scope.initNewWidget();
 			delete $scope.cards[0].max;
 			$scope.onSaveClicked();
 			expect(Materia.CreatorCore.cancelSave).toHaveBeenCalledWith("Please make sure every question is complete");
 		});
 
 		it('should cancel saving if there is no title', function(){
-			$scope.setup();
-			$scope.widgetTitle = '';
+			$scope.initNewWidget();
+			$scope.title = '';
 			$scope.onSaveClicked();
 			expect(Materia.CreatorCore.cancelSave).toHaveBeenCalledWith("Please enter a title.");
 		});

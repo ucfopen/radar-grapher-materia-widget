@@ -5,7 +5,7 @@ module.exports = function(config) {
 
         basePath: './',
 
-        browsers: ['Chrome'],
+        browsers: ['PhantomJS'],
 
         files: [
             '../../js/*.js',
@@ -19,6 +19,7 @@ module.exports = function(config) {
             'node_modules/chart.js/dist/Chart.js',
             'node_modules/angular-chart/angular-chart.min.js',
             'build/*.js',
+            'build/assets/*.js',
             'build/demo.json',
             'tests/*.js'
         ],
@@ -32,14 +33,11 @@ module.exports = function(config) {
             'karma-json-fixtures-preprocessor',
             'karma-junit-reporter',
             'karma-mocha-reporter',
-            'karma-phantomjs-launcher',
-            'karma-chrome-launcher'
+            'karma-phantomjs-launcher'
         ],
 
         preprocessors: {
-            // 'build/*.js': ['coverage', 'eslint']
-            'build/player.js': ['coverage', 'eslint'],
-            'build/creator.js': ['coverage', 'eslint'],
+            'build/*.js': ['coverage', 'eslint'],
             'build/demo.json': ['json_fixtures']
         },
 
