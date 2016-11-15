@@ -44,10 +44,15 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 
 	$scope.cards = []
 
+	# Track the total question count, so labels and questions do not repeat
+	# if one is deleted.
+	questionCount = 0
 
 	### Materia Interface Methods ###
 
-	$scope.initNewWidget = (widget, baseUrl) -> true
+	$scope.initNewWidget = (widget, baseUrl) ->
+		$scope.$apply ->
+			setup()
 
 	$scope.onSaveComplete = (title, widget, qset, version) -> true
 
@@ -55,33 +60,31 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 
 	$scope.onMediaImportComplete  = (media) -> null
 
-	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) -> true
+	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) ->
 
-	$scope.onSaveClicked = (mode = 'save') -> true
+		$scope.$apply ->
+			for item in qset.items
+				$scope.cards.push
+					question: item.questions[0].text
+					label: item.options.label
+					min: item.options.min
+					max: item.options.max
 
+				questionCount++
 
-	$scope.setup = ->
+			populateData()
+
+	setup = ->
 		$scope.addQuestion()
 		$scope.addQuestion()
 		$scope.addQuestion()
-
-	# Track the total question count, so labels and questions do not repeat
-	# if one is deleted.
-	questionCount = 0
 
 	populateData = ->
-
 		for card in $scope.cards
 			$scope.labels.push card.label
 			$scope.data[0].push 0
 
 		$scope.invalid = false
-
-	populateData()
-
-	# $scope.$on 'update', (evt, chart) ->
-
-	# $scope.$on 'create', (evt, chart) ->
 
 	# Add new	questions when the plus button is clicked as long as there are
 	# less than 10 questions.
