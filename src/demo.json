@@ -9,13 +9,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "U",
-						"min": "Min",
-						"max": "Max"
+						"label": "Like Change",
+						"min": "Dislike",
+						"max": "Like"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about U?"
+							"text": "How do you feel about change?"
 						}
 					],
 					"answers": [
@@ -30,13 +30,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "V",
-						"min": "Min",
-						"max": "Max"
+						"label": "Extroverted",
+						"min": "Introverted",
+						"max": "Extroverted"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about V?"
+							"text": "How do you about new people?"
 						}
 					],
 					"answers": [
@@ -51,13 +51,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "W",
-						"min": "Min",
-						"max": "Max"
+						"label": "List Maker",
+						"min": "Dislike",
+						"max": "Like"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about W?"
+							"text": "How do you feel about making lists?"
 						}
 					],
 					"answers": [
@@ -72,13 +72,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "X",
-						"min": "Min",
-						"max": "Max"
+						"label": "Easy to Know You",
+						"min": "Hard",
+						"max": "Easy"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about X?"
+							"text": "How easy is it for others to understand you?"
 						}
 					],
 					"answers": [
@@ -93,13 +93,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "Y",
-						"min": "Min",
-						"max": "Max"
+						"label": "Think Then Speak",
+						"min": "Never",
+						"max": "Always"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about Y?"
+							"text": "Do you think before you speak?"
 						}
 					],
 					"answers": [
@@ -114,13 +114,13 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "Z",
-						"min": "Min",
-						"max": "Max"
+						"label": "Size of Social Circle",
+						"min": "Minimal",
+						"max": "Crowded"
 					},
 					"questions": [
 						{
-							"text": "How do you feel about Z?"
+							"text": "How large is your social circle?"
 						}
 					],
 					"answers": [
