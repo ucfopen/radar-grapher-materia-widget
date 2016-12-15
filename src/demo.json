@@ -1,0 +1,136 @@
+{
+	"name": "Radar Grapher",
+	"qset": {
+		"version": 1,
+		"data": {
+			"items": [
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "U",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about U?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				},
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "V",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about V?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				},
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "W",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about W?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				},
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "X",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about X?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				},
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "Y",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about Y?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				},
+				{
+					"materiaType": "question",
+					"id": null,
+					"type": "MC",
+					"options": {
+						"label": "Z",
+						"min": "Min",
+						"max": "Max"
+					},
+					"questions": [
+						{
+							"text": "How do you feel about Z?"
+						}
+					],
+					"answers": [
+						{
+							"text": "[No Answer]",
+							"value": 0
+						}
+					]
+				}
+			]
+		}
+	}
+}
