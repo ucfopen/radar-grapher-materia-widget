@@ -63,6 +63,9 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) ->
 
 		$scope.$apply ->
+
+			$scope.widgetTitle = title
+
 			for item in qset.items
 				$scope.cards.push
 					question: item.questions[0].text
