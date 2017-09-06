@@ -114,7 +114,7 @@
 					"id": null,
 					"type": "MC",
 					"options": {
-						"label": "Size of Social Circle",
+						"label": "Social Circle Size",
 						"min": "Minimal",
 						"max": "Crowded"
 					},
