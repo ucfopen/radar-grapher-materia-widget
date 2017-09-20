@@ -197,6 +197,8 @@ RadarGrapher.directive 'labelLimitEnforcer', () ->
 	restrict: 'A',
 	link: ($scope, $element, $attrs) ->
 		$element.bind 'keypress', (e) ->
-			if $element[0].value.length >= $scope.labelCharLimit
+			# Allow backspace, delete, and arrow keys (for Firefox)
+			allowedCodes = [8, 37, 39, 46]
+			if !(e.keyCode in allowedCodes) && $element[0].value.length >= $scope.labelCharLimit
 				e.preventDefault()
 				return false
