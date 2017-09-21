@@ -63,7 +63,7 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		image = tempCanvas.toDataURL("image/png")
 
 		$event.currentTarget.href = image
-		$event.currentTarget.download = $scope.instance.name
+		$event.currentTarget.download = $scope.instance.name + ".png"
 
 	$scope.adjustResponses = ->
 		return $scope.inProgress = !$scope.inProgress
