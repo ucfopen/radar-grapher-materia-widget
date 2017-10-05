@@ -32,7 +32,7 @@ RadarGrapher.config ($mdThemingProvider) ->
 
 RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, $compile, Resource) ->
 
-	$scope.title = "My Radar Grapher Widget"
+	$scope.widgetTitle = "My Radar Grapher Widget"
 
 	$scope.data = [[]]
 	$scope.labels = []
@@ -47,14 +47,22 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 	# if one is deleted.
 	questionCount = 0
 
-	$scope.initNewWidget = (widget) ->
+	### Materia Interface Methods ###
+
+	$scope.initNewWidget = (widget, baseUrl) ->
 		$scope.$apply ->
 			setup()
 
-	$scope.initExistingWidget = (title,widget,qset) ->
+	$scope.onSaveComplete = (title, widget, qset, version) -> true
+
+	$scope.onQuestionImportComplete = (items) -> true
+
+	$scope.initExistingWidget = (title,widget,qset,version,baseUrl) ->
 
 		$scope.$apply ->
-			$scope.title = title
+
+			$scope.widgetTitle = title
+
 			for item in qset.items
 				$scope.cards.push
 					question: item.questions[0].text
@@ -117,8 +125,8 @@ RadarGrapher.controller 'RadarGrapherController', ($scope, $mdToast, $sanitize, 
 		_isValid = $scope.validation()
 
 		if _isValid
-			qset = Resource.buildQset $sanitize($scope.title), $scope.cards
-			if qset then Materia.CreatorCore.save $sanitize($scope.title), qset
+			qset = Resource.buildQset $sanitize($scope.widgetTitle), $scope.cards
+			if qset then Materia.CreatorCore.save $sanitize($scope.widgetTitle), qset
 		else
 			Materia.CreatorCore.cancelSave "Please make sure every question is complete"
 			return false
@@ -182,6 +190,8 @@ RadarGrapher.directive 'labelLimitEnforcer', () ->
 	restrict: 'A',
 	link: ($scope, $element, $attrs) ->
 		$element.bind 'keypress', (e) ->
-			if $element[0].value.length >= $scope.labelCharLimit
+			# Allow backspace, delete, and arrow keys (for Firefox)
+			allowedCodes = [8, 37, 39, 46]
+			if !(e.keyCode in allowedCodes) && $element[0].value.length >= $scope.labelCharLimit
 				e.preventDefault()
 				return false

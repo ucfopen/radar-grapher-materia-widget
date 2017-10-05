@@ -22,7 +22,7 @@ RadarGrapher.config ['ChartJsProvider', (ChartJsProvider) ->
 			pointDotRadius: 2
 			pointDotStrokeWidth: 0.1
 			responsive: false
-			angleLineWidth : 8
+			angleLineWidth : 5
 			angleLineColor: '#d5d5d5'
 		}
 	]
@@ -33,6 +33,75 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 	$scope.qset = null
 	$scope.instance = null
 	$scope.responses = []
+	$scope.paddedResponses = []
+	$scope.referenceLinesToggled
+
+	$scope.printResults = ->
+		window.print()
+
+	$scope.graphToImage = ($event) ->
+		image = new Image
+		# Used to keep the permanent canvas untouched
+		tempCanvas = document.createElement "canvas"
+
+		# These two elements must be combined to make a single image
+		wheel = document.getElementById 'outer-wheel'
+		radar = document.getElementById 'radar'
+
+		tempCanvas.width = wheel.width + 40
+		tempCanvas.height = wheel.height + 40
+
+		context = tempCanvas.getContext '2d'
+
+		# Fills background to be white
+		context.fillStyle = 'white'
+		context.fillRect 0, 0, tempCanvas.width, tempCanvas.height
+
+		context.drawImage wheel, 0, 20
+		context.drawImage radar, 0, 20
+
+		image = tempCanvas.toDataURL("image/png")
+
+		$event.currentTarget.href = image
+		$event.currentTarget.download = $scope.instance.name + ".png"
+
+	$scope.adjustResponses = ->
+		return $scope.inProgress = !$scope.inProgress
+
+	$scope.initResponse = (index) ->
+		if $scope.responses[index] == undefined
+			return $scope.responses[index] = 0
+		else
+			return $scope.responses[index]
+
+	$scope.toggleReferenceLines = ->
+		$scope.referenceLinesToggled = !$scope.referenceLinesToggled
+
+		if $scope.referenceLinesToggled
+			radar = document.getElementById 'radar'
+			wheel = document.getElementById 'outer-wheel'
+
+			radarWidth = radar.width
+			radarHeight = radar.height
+
+			ctx = wheel.getContext '2d'
+			ctx.fillStyle = '#d5d5d5'
+			ctx.strokeStyle = '#d5d5d5'
+			ctx.lineWidth = radarHeight / 150
+
+			i = 0
+
+			while i <= radarHeight / 2.2
+				# Distance between each reference circle
+
+				# generates rings on the radar graph to give user context
+				ctx.beginPath()
+				ctx.arc (radarWidth / 2), (radarHeight / 2), radarHeight / 2.2 - i, 0, 2 * Math.PI
+				ctx.stroke()
+
+				i += radarHeight / 9
+		else
+			_drawOuterWheel()
 
 	# Chart data. Includes the labels.
 	# The chart can handle more than one set of data, but we will only use one.
@@ -52,26 +121,27 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 
 	$scope.submit = ->
 		_padResponses()
-		$scope.data[0] = $scope.responses
+		$scope.data[0] = $scope.paddedResponses
 
 		# Change the screen from questions to chart
 		$scope.inProgress = false
+		$scope.referenceLinesToggled = false
 
 	# Add 20 to each response to make room for the circle in the center of the graph.
 	_padResponses = ->
 		for response, i in $scope.responses
 			# $scope.responses[i] = if response < 90 then response + 10 else response
-			$scope.responses[i] = Math.floor($scope.responses[i] * 0.8) + 10
+			$scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10
 
-
-	$scope.$on 'create', (evt, chart) ->
-
+	# Draws the wheel that acts as a backdrop to the radar graph
+	# 	All values for outer wheel are based off of the values of the radar to
+	#		aid in scaling
+	_drawOuterWheel = ->
 		radar = document.getElementById 'radar'
-
 		wheel = document.getElementById 'outer-wheel'
 
-		radarWidth = 800
-		radarHeight = 500
+		radarWidth = radar.width
+		radarHeight = radar.height
 
 		wheel.width = radarWidth
 		wheel.height = radarHeight
@@ -79,21 +149,20 @@ RadarGrapher.controller 'RadarGrapherEngineCtrl', ['$scope', ($scope) ->
 		ctx = wheel.getContext '2d'
 		ctx.fillStyle = '#d5d5d5'
 		ctx.strokeStyle = '#d5d5d5'
-		ctx.beginPath()
-		ctx.lineWidth = 20
+		ctx.lineWidth = radarWidth / 150
 
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 218, 0, 2 * Math.PI
+		ctx.beginPath()
+		ctx.arc (radarWidth / 2), (radarHeight / 2), radarHeight / 2.2, 0, 2 * Math.PI
 		ctx.stroke()
 
+		# center of the radar graph
 		ctx.beginPath()
-		ctx.arc (radarWidth / 2), (radarHeight / 2), 20, 0, 2 * Math.PI
+		ctx.arc (radarWidth / 2), (radarHeight / 2),radarHeight/20, 0, 2 * Math.PI
 		ctx.fill()
+
+	$scope.$on 'create', (evt, chart) ->
+		_drawOuterWheel()
 
 
 	Materia.Engine.start($scope)
 ]
-
-
-#RadarGrapher.controller 'PrintController', ['$scope', ($scope) ->
-#
-#]

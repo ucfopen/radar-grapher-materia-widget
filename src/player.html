@@ -34,17 +34,19 @@
 		<!-- MAIN WIDGET SCRIPT -->
 		<script src="player.js"></script>
 
-
 	</head>
 	<body ng-app="RadarGrapherEngine" ng-controller="RadarGrapherEngineCtrl" ng-cloak>
 		<md-content id="container">
 			<md-toolbar>
 				<div class="md-toolbar-tools">
 					<h2>{{instance.name}}</h2>
+					<span ng-if="!inProgress" ng-click="printResults()" class="icon-print non-printable" title="Print"></span>
+					<a ng-if="!inProgress" ng-click="graphToImage($event)" class="icon-image non-printable" title="Download Graph as Image"></a>
+					<span ng-if="!inProgress" ng-click="adjustResponses()" class="icon-return non-printable" title="Adjust Responses"></span>
 				</div>
 			</md-toolbar>
 			<section ng-if="inProgress">
-				<md-card ng-repeat="question in qset.items" ng-init="responses[$index] = 0" class="md-whiteframe-3dp card">
+				<md-card ng-repeat="question in qset.items" ng-init="initResponse($index)" class="md-whiteframe-3dp card">
 					<md-card-title>
 						<span class="md-headline">{{question.questions[0].text}}</span>
 					</md-card-title>
@@ -64,7 +66,10 @@
 				</section>
 			</section>
 			<section class="graph-output" ng-if="!inProgress">
-				<div class="cover"></div>
+				<div class="cover">
+					<span ng-if="referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-off non-printable" title="Turn Off Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
+					<span ng-if="!referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-on non-printable" title="Turn On Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
+				</div>
 				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
 				<canvas id="outer-wheel"></canvas>
 			</section>
