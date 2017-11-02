@@ -1,66 +1,90 @@
 module.exports = function(config) {
-    config.set({
+	config.set({
 
-        autoWatch: false,
+		// autoWatch: false, // moved into pakcage.json script option
 
-        basePath: './',
+		basePath: './',
 
-        browsers: ['PhantomJS','Chrome'],
+		browsers: ['PhantomJS'],
 
-        files: [
-            '../../js/*.js',
-            'node_modules/angular/angular.js',
-            'node_modules/angular-animate/angular-animate.js',
-            'node_modules/angular-aria/angular-aria.js',
-            'node_modules/angular-mocks/angular-mocks.js',
-            'node_modules/angular-sanitize/angular-sanitize.js',
-            'node_modules/angular-material/angular-material.min.js',
-            'node_modules/chart.js/dist/Chart.js',
-            'node_modules/angular-chart/angular-chart.min.js',
-            'build/*.js',
-            'tests/*.js'
-        ],
+		files: [
+			'node_modules/angular/angular.js',
+			'node_modules/angular-animate/angular-animate.js',
+			'node_modules/angular-aria/angular-aria.js',
+			'node_modules/angular-mocks/angular-mocks.js',
+			'node_modules/angular-sanitize/angular-sanitize.js',
+			'node_modules/angular-material/angular-material.js',
+			'node_modules/chart.js/dist/Chart.js',
+			'node_modules/materia-client-assets/dist/js/materia.js',
+			'node_modules/materia-client-assets/dist/js/student.js',
+			'node_modules/materia-client-assets/dist/js/author.js',
+			'build/demo.json',
+			'build/assets/*.js',
+			'build/*.js',			
+			'tests/*.js'
+		],
 
-        frameworks: ['jasmine'],
+		frameworks: ['jasmine'],
 
-        plugins: [
-            'karma-coverage',
-            'karma-jasmine',
-            'karma-junit-reporter',
-            'karma-mocha-reporter',
-            'karma-phantomjs-launcher',
-            'karma-chrome-launcher'
-        ],
+		plugins: [
+			'karma-coverage',
+			'karma-eslint',
+			'karma-jasmine',
+			'karma-json-fixtures-preprocessor',
+			'karma-mocha-reporter',
+			'karma-phantomjs-launcher'
+		],
 
-        singleRun: true,
+		preprocessors: {
+		// 	'build/*.js': ['coverage', 'eslint'],
+			'build/demo.json': ['json_fixtures']
+		},
 
-        reporters: ['coverage', 'mocha'],
+		// singleRun: true, // moved into pakcage.json script option
 
-        //reporter-specific configurations
+		//plugin-specific configurations
+		eslint: {
+			stopOnError: true,
+			stopOnWarning: false,
+			showWarnings: true,
+			engine: {
+				configFile: '.eslintrc.json'
+			}
+		},
 
-        coverageReporter: {
-            check: {
-                global: {
-                    statements: 90,
-                    branches:   90,
-                    functions:  90,
-                    lines:      90
-                },
-                each: {
-                    statements: 90,
-                    branches:   90,
-                    functions:  90,
-                    lines:      90
-                }
-            },
-            reporters: [
-                { type: 'cobertura', subdir: '.', file: 'coverage.xml' }
-            ]
-        },
+		jsonFixturesPreprocessor: {
+			variableName: '__demo__'
+		},
 
-        mochaReporter: {
-            output: 'autowatch'
-        }
+		reporters: ['coverage', 'mocha'],
 
-    });
+		//reporter-specific configurations
+
+		coverageReporter: {
+			check: {
+				global: {
+					statements: 100,
+					branches:   80,
+					functions:  90,
+					lines:      90
+				},
+				each: {
+					statements: 100,
+					branches:   80,
+					functions:  90,
+					lines:      90
+				}
+			},
+			reporters: [
+				{ type: 'html', subdir: 'report-html' },
+				{ type: 'cobertura', subdir: '.', file: 'coverage.xml' }
+			]
+		},
+
+		mochaReporter: {
+			output: 'autowatch'
+		}
+
+	});
+
 };

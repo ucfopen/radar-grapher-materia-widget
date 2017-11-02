@@ -1,7 +1,4 @@
-// var widgetInfo = window.__demo__['build/demo'];
-// var qset = widgetInfo.qset;
-
-describe('radar module', function () {
+describe('Radar Grapher', function () {
 	var widgetInfo = window.__demo__['build/demo'];
 	var qset = widgetInfo.qset;
 	var $scope = {};
@@ -10,15 +7,19 @@ describe('radar module', function () {
 
 	describe('Player', function () {
 
-		// beforeEach(module('RadarGrapherEngine'));
 		module.sharedInjector();
 		beforeAll(module('RadarGrapherEngine'));
 
-		beforeEach(inject(function($rootScope, $controller){
+		beforeAll(inject(function($rootScope, $controller){
 			//instantiate $scope with all of the generic $scope methods/properties
 			$scope = $rootScope.$new();
 			ctrl = $controller('RadarGrapherEngineCtrl', { $scope: $scope });
 		}));
+
+		beforeEach(function(){
+			//spy on Materia.Engine.end()
+			spyOn(Materia.Engine, 'end');
+		});
 
 		it('should start properly', function(){
 			$scope.start(widgetInfo, qset.data);
@@ -40,28 +41,6 @@ describe('radar module', function () {
 		it('should set inProgress to false after submit', function () {
 			$scope.submit();
 			expect($scope.inProgress).toBe(false);
-		});
-
-		it('should have given the canvas element the correct width and height', function(){
-			//we create the canvas elements for the upcoming create event to manipulate
-			var canvas_elements = '<canvas id="radar">' + '</canvas>' +
-					'<canvas id="outer-wheel">' + '</canvas>';
-			//we make sure that the elements exist within the body tag
-			document.body.insertAdjacentHTML(
-				'afterbegin',
-				canvas_elements);
-
-			//we fire the create event which is caught in the player controller
-			$scope.$emit('create');
-			//we expect the canvas elements to be set up correctly
-			expect(document.getElementById('outer-wheel').width).toBe(800);
-			expect(document.getElementById('outer-wheel').height).toBe(500);
-			//this is needed for canvas specific properties
-			var ctx = document.getElementById("outer-wheel").getContext("2d");
-			// var ctx = canvas.getContext("2d");
-			expect(ctx.fillStyle).toBe('#d5d5d5');
-			expect(ctx.strokeStyle).toBe('#d5d5d5');
-			expect(ctx.lineWidth).toBe(20);
 		});
 	});
 
@@ -85,7 +64,7 @@ describe('radar module', function () {
 		});
 
 		it('should have initial variables declared' , function() {
-			expect($scope.title).toBe("My Radar Grapher Widget");
+			expect($scope.widgetTitle).toBe("My Radar Grapher Widget");
 			expect($scope.data).toEqual([[]]);
 			expect($scope.labels).toEqual([]);
 			expect($scope.fillColor).toBe('rgba(255,64,129, 0.5)');
@@ -110,13 +89,13 @@ describe('radar module', function () {
 
 		it('should initExisting Widget', function () {
 			$scope.initExistingWidget(widgetInfo.name, widgetInfo, qset.data);
-			expect($scope.title).toBe(widgetInfo.name);
-			expect($scope.cards[0].question).toBe("How do you feel about U?");
-			expect($scope.cards[0].label).toBe("U");
-			expect($scope.cards[0].min).toBe("Min");
-			expect($scope.cards[0].max).toBe("Max");
+			expect($scope.widgetTitle).toBe(widgetInfo.name);
+			expect($scope.cards[0].question).toBe("How do you feel about change?");
+			expect($scope.cards[0].label).toBe("Like Change");
+			expect($scope.cards[0].min).toBe("Dislike");
+			expect($scope.cards[0].max).toBe("Like");
 			//expect populateData to have worked
-			expect($scope.labels[0]).toBe("U");
+			expect($scope.labels[0]).toBe("Like Change");
 			//6 numbers (U,V,W,X,Y,Z)
 			expect($scope.data[0]).toEqual([0,0,0,0,0,0]);
 		});
@@ -196,22 +175,44 @@ describe('radar module', function () {
 
 		it('should cancel saving if there is no title', function(){
 			$scope.initNewWidget();
-			$scope.title = '';
+			$scope.widgetTitle = '';
 			$scope.onSaveClicked();
 			expect(Materia.CreatorCore.cancelSave).toHaveBeenCalledWith("Please enter a title.");
 		});
 
 		it('should not allow an input with length greater than labelCharLimit ', function() {
-			var element = angular.element("<input value='' label-limit-enforcer/>");
-			//test string greater than 20 characters should return
-			element[0].value = 'thisistwentyonecharcs';
+
+			var element = angular.element("<input value='' label-limit-enforcer />");
 			element = $compiler(element)($scope);
-			var keyReturn = element.triggerHandler('keypress');
-			expect(keyReturn).toBe(false);
-			//test a small string
-			element[0].value = 'smallString';
-			keyReturn = element.triggerHandler('keypress');
-			expect(keyReturn).toBe(undefined);
+			$scope.$digest();
+
+			// Function to test keypress events
+			function keyPress(keyCode) {
+				var keyEvent = new Event('keypress');
+				keyEvent.which = keyCode;
+				return keyEvent
+			}
+
+			// test that label-limit-enforcer is preventing keystroke due to character limit			
+			element[0].setAttribute('value','thisistwentyonecha');
+
+			var negativeCharacterKey = keyPress(82);
+			spyOn(negativeCharacterKey, 'preventDefault');
+		
+			element.triggerHandler(negativeCharacterKey);
+
+			expect(negativeCharacterKey.preventDefault).toHaveBeenCalled();
+			expect(element.attr('value')).toBe('thisistwentyonecha');
+			
+			// test that label-limit-enforcer is allowing keystroke
+			element[0].setAttribute('value','cha');
+			var positiveCharacterKey = keyPress(82);
+
+			spyOn(positiveCharacterKey, 'preventDefault');
+
+			element.triggerHandler(positiveCharacterKey);
+
+			expect(positiveCharacterKey.preventDefault).not.toHaveBeenCalled();
 		});
 	});
 });

@@ -6,7 +6,7 @@
 	"version": "0.1.1",
 	"private": true,
 	"dependencies": {
-    "materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit.git#v1.0.4"
+    "materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit#semver:>=1.0.6 <1.10.0"
   },
   "scripts": {
     "start": "webpack-dev-server",
@@ -21,6 +21,12 @@
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",
     "angular-route": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
+    "angular-aria": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "chart.js": "~2.7.0",
+    "angular-material": "~1.1.5",
+    "protractor": "^3.2.2",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
     "karma-coverage": "^0.5.5",
