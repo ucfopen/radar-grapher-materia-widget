@@ -1,11 +1,11 @@
 {
-	"name": "@ucfcdl/radar-grapher",
-	"materia": {
-		"cleanName": "radar-grapher"
-	},
-	"version": "0.1.1",
-	"private": true,
-	"dependencies": {
+  "name": "@ucfcdl/radar-grapher",
+  "materia": {
+    "cleanName": "radar-grapher"
+  },
+  "version": "0.1.1",
+  "private": true,
+  "dependencies": {
     "materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit#semver:>=1.0.6 <1.10.0"
   },
   "scripts": {
@@ -36,5 +36,5 @@
     "karma-mocha-reporter": "^2.1.0",
     "karma-phantomjs-launcher": "^1.0.2"
   },
-	"license": "UNLICENSED"
+  "license": "UNLICENSED"
 }
