@@ -20,7 +20,7 @@ module.exports = function(config) {
 			'node_modules/materia-client-assets/dist/js/author.js',
 			'build/demo.json',
 			'build/assets/*.js',
-			'build/*.js',			
+			'build/*.js',
 			'tests/*.js'
 		],
 
@@ -28,7 +28,6 @@ module.exports = function(config) {
 
 		plugins: [
 			'karma-coverage',
-			'karma-eslint',
 			'karma-jasmine',
 			'karma-json-fixtures-preprocessor',
 			'karma-mocha-reporter',
@@ -36,21 +35,13 @@ module.exports = function(config) {
 		],
 
 		preprocessors: {
-		// 	'build/*.js': ['coverage', 'eslint'],
+			'build/*.js': ['coverage'],
 			'build/demo.json': ['json_fixtures']
 		},
 
 		// singleRun: true, // moved into pakcage.json script option
 
 		//plugin-specific configurations
-		eslint: {
-			stopOnError: true,
-			stopOnWarning: false,
-			showWarnings: true,
-			engine: {
-				configFile: '.eslintrc.json'
-			}
-		},
 
 		jsonFixturesPreprocessor: {
 			variableName: '__demo__'
