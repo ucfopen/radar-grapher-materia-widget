@@ -7,10 +7,11 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build-dev": "webpack",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "echo 'No Jest tests have been authored for this widget. Be awesome and write some!'"
   },
   "devDependencies": {
-    "materia-widget-development-kit": "v1.2.2"
+    "materia-widget-development-kit":"2.0.0"
   },
   "license": "AGPL-3.0"
 }
