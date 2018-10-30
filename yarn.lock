@@ -89,6 +89,14 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
+angular-chart.js@0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/angular-chart.js/-/angular-chart.js-0.10.2.tgz#6d4be36cef9707a7b9efe672976690c76a9c5c88"
+  integrity sha1-bUvjbO+XB6e57+Zyl2aQx2qcXIg=
+  dependencies:
+    angular "1.x"
+    chart.js "^1.1.1"
+
 angular-mocks@1.6.9:
   version "1.6.9"
   resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.6.9.tgz#4fed8c8293a5080e0919a7ff0dcf0f704864b7ba"
@@ -98,6 +106,11 @@ angular@1.6.9:
   version "1.6.9"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.9.tgz#bc812932e18909038412d594a5990f4bb66c0619"
   integrity sha512-6igWH2GIsxV+J38wNWCh8oyjaZsrIPIDO35twloIUyjlF2Yit6UyLAWujHP05ma/LFxTsx4NtYibRoMNBXPR1A==
+
+angular@1.x:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.5.tgz#d1c1c01c6f5dc835638f3f9aa51012857bdac49e"
+  integrity sha512-760183yxtGzni740IBTieNuWLtPNAoMqvmC0Z62UoU0I3nqk+VJuO3JbQAXOyvo3Oy/ZsdNQwrSTh/B0OQZjNw==
 
 ansi-html@0.0.7:
   version "0.0.7"
@@ -1203,6 +1216,11 @@ chalk@^2.1.0:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
     supports-color "^4.0.0"
+
+chart.js@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-1.1.1.tgz#a9b17054220bd45cbdb176fd6bcb8783ef871a7d"
+  integrity sha1-qbFwVCIL1Fy9sXb9a8uHg++HGn0=
 
 chokidar@^1.6.0, chokidar@^1.7.0:
   version "1.7.0"
@@ -3517,7 +3535,7 @@ materia-server-client-assets@v1.0.0:
     angular "1.6.9"
     ngmodal ucfcdl/ngModal#v1.2.2
 
-materia-widget-development-kit@2.0.0:
+materia-widget-development-kit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/materia-widget-development-kit/-/materia-widget-development-kit-2.0.0.tgz#f4b775ba530a3f15e32317a03d1f3c84e2bb3b75"
   integrity sha512-xEVPA5MicVJ/purEXAnmS5nnaGMvN7vLdLFZTDTj8q93IKVyhj1YqxBTykXUHHiCWl/LB8MmdjTgWaT1fP8flQ==
@@ -3758,7 +3776,7 @@ negotiator@0.6.1:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
 
-"ngmodal@github:ucfcdl/ngModal#v1.2.2":
+ngmodal@ucfcdl/ngModal#v1.2.2:
   version "1.2.2"
   resolved "https://codeload.github.com/ucfcdl/ngModal/tar.gz/6abad982bdb8f258ffcdc20316a907c2292399d2"
 
