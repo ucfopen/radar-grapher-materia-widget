@@ -1,24 +1,21 @@
 {
-	"name": "@ucfcdl/radar-grapher",
-	"materia": {
-		"cleanName": "radar-grapher"
-	},
-	"version": "0.1.1",
-	"private": true,
-	"dependencies": {
-		"materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit.git#v1.0.4"
-	},
-	"scripts": {
-		"start": "webpack-dev-server",
-		"build": "webpack",
-		"build-prod": "webpack -p"
-	},
-	"author": "University of Central Florida, Center for Distributed Learning",
-	"description": "* Radar Grapher is a tool for creating custom radar charts ",
-	"main": "webpack.config.js",
-	"repository": {
-		"type": "git",
-		"url": "git@clu.cdl.ucf.edu:materia/radar-grapher.git"
-	},
-	"license": "UNLICENSED"
+  "name": "@ucfopen/radar-grapher",
+  "materia": {
+    "cleanName": "radar-grapher"
+  },
+  "version": "1.0.1",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build-dev": "webpack",
+    "build": "webpack -p",
+    "test": "echo 'no tests implemented'",
+    "test-ci": "echo 'no tests implemented'"
+  },
+  "dependencies": {
+    "angular-chart.js": "0.10.2",
+    "materia-widget-development-kit": "^2.0.0"
+  },
+  "author": "University of Central Florida, Center for Distributed Learning",
+  "description": "Materia widget for creating custom radar charts",
+  "license": "AGPL-3.0"
 }
