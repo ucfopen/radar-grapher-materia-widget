@@ -5,15 +5,7 @@
  * DS205: Consider reworking code to avoid use of IIFEs
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-/*
 
-Materia
-It's a thing
-
-Widget: Radar Grapher, Engine
-Authors: Ivey Padgett
-
-*/
 const RadarGrapher = angular.module('RadarGrapherEngine', ['ngMaterial', 'chart.js']);
 
 RadarGrapher.config(['ChartJsProvider', ChartJsProvider =>
@@ -32,7 +24,7 @@ RadarGrapher.config(['ChartJsProvider', ChartJsProvider =>
 			angleLineWidth : 5,
 			angleLineColor: '#d5d5d5'
 		})
-	
+
 	]);
 
 RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', function($scope) {

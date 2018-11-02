@@ -8,12 +8,34 @@
     "start": "webpack-dev-server",
     "build-dev": "webpack",
     "build": "webpack -p",
-    "test": "echo 'no tests implemented'",
-    "test-ci": "echo 'no tests implemented'"
+    "test": "TZ='America/New_York' jest --verbose",
+    "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
   },
   "dependencies": {
+    "angular": "1.6.9",
+    "angular-mocks": "1.6.9",
+    "jest": "^23.6.0",
     "angular-chart.js": "0.10.2",
+    "angular-material": "1.0.0",
     "materia-widget-development-kit": "^2.0.0"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
+    ],
+    "verbose": false,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 18,
+        "branches": 0,
+        "functions": 19,
+        "lines": 19
+      }
+    }
   },
   "author": "University of Central Florida, Center for Distributed Learning",
   "description": "Materia widget for creating custom radar charts",

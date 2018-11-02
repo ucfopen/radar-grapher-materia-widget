@@ -3,23 +3,23 @@
 let RadarGrapher = angular.module('RadarGrapherCreator', ['ngMaterial', 'chart.js', 'ngSanitize']);
 
 RadarGrapher.config(['$mdThemingProvider', ($mdThemingProvider) =>
-		$mdThemingProvider.theme('toolbar-dark', 'default')
-        .primaryPalette('indigo')
-        .dark()
+	$mdThemingProvider.theme('toolbar-dark', 'default')
+		.primaryPalette('indigo')
+		.dark()
 ]);
 
 RadarGrapher.config(['ChartJsProvider', (ChartJsProvider) =>
-    ChartJsProvider.setOptions({
-        colours: ['#ff4081'],
-        scaleOverride: true,
-        scaleSteps: 5,
-        scaleStepWidth: 20,
-        scaleStartValue: 0, // The chart is always from 0 to 100
-        scaleShowLine: false,
-        pointLabelFontSize: 15,
-        responsive: false,
-        angleLineWidth: 4
-    })
+	ChartJsProvider.setOptions({
+		colours: ['#ff4081'],
+		scaleOverride: true,
+		scaleSteps: 5,
+		scaleStepWidth: 20,
+		scaleStartValue: 0, // The chart is always from 0 to 100
+		scaleShowLine: false,
+		pointLabelFontSize: 15,
+		responsive: false,
+		angleLineWidth: 4
+	})
 ]);
 
 RadarGrapher.controller('RadarGrapherController', ['$scope','$mdToast','$sanitize','$compile','Resource', ($scope, $mdToast, $sanitize, $compile, Resource) => {
