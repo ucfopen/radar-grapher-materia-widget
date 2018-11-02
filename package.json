@@ -1,37 +1,46 @@
 {
-  "name": "@ucfcdl/radar-grapher",
+  "name": "@ucfopen/radar-grapher",
   "materia": {
     "cleanName": "radar-grapher"
   },
-  "version": "0.1.1",
-  "private": true,
+  "version": "1.0.1",
   "scripts": {
     "start": "webpack-dev-server",
     "build-dev": "webpack",
     "build": "webpack -p",
-    "pretest": "npm run build-dev",
-    "test": "karma start ./karma.conf.js --no-auto-watch --single-run"
+    "test": "TZ='America/New_York' jest --verbose",
+    "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
+  },
+  "dependencies": {
+    "angular-chart.js": "0.10.2",
+    "angular-material": "1.0.0",
+    "materia-widget-development-kit": "^2.0.0"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
+    ],
+    "verbose": false,
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 18,
+        "branches": 0,
+        "functions": 19,
+        "lines": 19
+      }
+    }
+  },
+  "devDependencies": {
+    "angular": "1.6.9",
+    "angular-mocks": "1.6.9",
+    "jest": "^23.6.0",
+    "jest-coffee-preprocessor": "^1.0.0"
   },
   "author": "University of Central Florida, Center for Distributed Learning",
-  "devDependencies": {
-    "angular": "~1.5.0",
-    "angular-loader": "~1.5.0",
-    "angular-mocks": "~1.5.0",
-    "angular-route": "~1.5.0",
-    "angular-sanitize": "~1.5.0",
-    "angular-aria": "~1.5.0",
-    "angular-animate": "~1.5.0",
-    "chart.js": "~2.7.0",
-    "angular-material": "~1.1.5",
-    "protractor": "^3.2.2",
-    "jasmine-core": "^2.4.1",
-    "karma": "^0.13.22",
-    "karma-coverage": "^0.5.5",
-    "karma-jasmine": "^0.3.8",
-    "karma-json-fixtures-preprocessor": "0.0.6",
-    "karma-mocha-reporter": "^2.1.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "materia-widget-development-kit": "git+ssh://git@clu.cdl.ucf.edu:materia/materia-widget-development-kit#semver:>=1.0.6 <1.10.0"
-  },
-  "license": "UNLICENSED"
+  "description": "Materia widget for creating custom radar charts",
+  "license": "AGPL-3.0"
 }

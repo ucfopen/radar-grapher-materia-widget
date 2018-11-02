@@ -1,9 +1,7 @@
-**/.DS_Store
 .sass-cache
-.idea
 node_modules
 bower_components
-*build
+build
 coverage
 *.iml
 .vscode
