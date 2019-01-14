@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - '6'
+cache:
+  yarn: true
+  directories:
+    - node_modules
+before_install:
+  - npm config set spin false
+  - npm install -g npm@^5
+script:
+  - yarn test-ci
+  - yarn build
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: "KtsIbTV8C0y9R65lBfPvR8+hZkoCtZIMz61VJmb0GGM1yl+ZoL2OpBCiKZtJUNNZioaOyI92dwdQIwCnenm4GFgwhQNg/SCawHlCz6C9bYMsZiWNkolJLOsGuShCjbzAXIWygzOhrtsugSyDcVk4olDOGKiq7KbL05JRhiT6nrPuSjwLo0f+k7OyE3tB8NIfUfuGr0v76qgUR3vc31X+Rg4q9YYiXLILNxEu0vs78I7ga3FOxgHN4L26qQ6S55SC9PudoGLgIpF333lkTyhuj7cF1hj2hVyNgcP5Fxi+CN2/RQqDcnvubKTN+7aG7cFUa63Q/nIImNJtKVxgzEDjiDebjDv2EboBWjZ3ClT/VaVVnKErqFVk7txG2MuU8YrPUij2Z6kW0FW8dDAtn4YZrS8LWjdY/ETqS1s9J98sFB8aZBSUlGbHI2SiZdei0L9/ASV7fEgMkxvpUM1cEzej1/BPrbUkiU6sNlq3AWCbLuABlFuFLBubjz4i907j8d4nLg/kkrdhZn/6CRXpcHoSslATU8NxwGTHrUrN0gql6yT+dDMJkKiIOd+ahP2Icp5lImz+2LNoSenp1leEPEsalBHe0C3gTZG1T4dxa0Lx9iDpqC9VPQOmneb0lXNJLg4ZIzC+11uQuI1lwMpUtSAnn9QD+hAXuHcxxxGigx/t374="
+  file:
+    - build/_output/radar-grapher.wigt
+    - build/_output/radar-grapher-build-info.yml
+  on:
+    tags: true
+    repo: ucfopen/radar-grapher-materia-widget
+notifications:
+  email: false
+  slack:
+    secure: "cEhKf2ePQOMA7Nl45PDKfCrKP0ER69WNZMs7eS+vMHxVTLaQTQAH8rbRcnYB+0b9j7VB2T0sphQMHmorKEtzE8pwOoTcjAZ8R7o69djMsX86LyIr+0RfQGOhXUhyS9+WHc9k2dnIs1Afy1MtcimlQSxkBZCt//1cIKDNLWHkO5Rsb3wHbORIwaZXXFUvnPx5kwWo8iBiB5+tjRToiJajm9+bgKC+/ZsM9GfkquOLxGxmQnO7P8nUY4TIvyyUd3c44Yohi6yH5SuhesWpCrHG3fOBQWNT5QPNyGovfFHl2CMx+EDxwQBcOnsHUXwA9ILEw6hfJdvFKePq7ZZcA5RKDSGl4okONYGO339FFP+r1wsAR+PuzuXegJ9pEAfEONpdtoaY77ZFSPvkczlyE1RyEB9vcUoVxSR8XPRyiP5MGBKVWYHaYPhy2UKPeHj3XfAPESx2Ai2Pbj9dTJhGa/XFJ9osp8TPuiRevdw8Yu/yQygRr2Xho+xvMqke5sBINNubnQ6QypLT5eC0sPvWdkniqfQFSQ+ibIfeuqlT0tiVFM82/SXKRv3zILdfoRks+bAXy0GPmHK2hLzhGqpb42qNTt50eMarlObM92CvJU0fUS6LPie5LjpQnHKM6o3ZdYdBNnzEhaV7HvQmui74qV6zH6LO1v2XNr6sznD3yZf+MyE="

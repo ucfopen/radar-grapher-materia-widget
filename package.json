@@ -17,7 +17,7 @@
     "jest": "^23.6.0",
     "angular-chart.js": "0.10.2",
     "angular-material": "1.0.0",
-    "materia-widget-development-kit": "^2.0.0"
+    "materia-widget-development-kit": "^2.3.0"
   },
   "jest": {
     "coverageReporters": [
