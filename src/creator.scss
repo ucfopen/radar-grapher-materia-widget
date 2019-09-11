@@ -30,41 +30,51 @@
 		padding-top: 64px;
 		min-width: 700px;
 
-		#chart-container {
-			width: 100%;
-			max-height: 100%;
-			min-height: 390px;
+		@media (min-width: 1365px) {
 
-			text-align: center;
-
-			position: relative;
-
-			.cover {
-				height: 100%;
+			#chart-container {
 				width: 100%;
-				z-index: 10;
-				position: absolute;
-			}
+				max-height: 100%;
+				min-height: 390px;
 
-			#radar {
-				width: 100%;
-			}
+				text-align: center;
 
-			h2 {
-				margin: 20px 0px 0px 0px;
-			}
+				position: relative;
 
-			@media (max-width: 960px) {
+				.cover {
+					height: 100%;
+					width: 100%;
+					z-index: 10;
+					position: absolute;
+				}
+
+				#radar {
+					width: 100%;
+				}
+
 				h2 {
-					position: fixed;
-					top: 50px;
-					left: 10px;
+					margin: 20px 0px 0px 0px;
+				}
+
+				@media (max-width: 960px) {
+					h2 {
+						position: fixed;
+						top: 50px;
+						left: 10px;
+					}
+				}
+
+				.card {
+					margin: 20px;
+					padding: 25px;
 				}
 			}
+		}
 
-			.card {
-				margin: 20px;
-				padding: 25px;
+		@media (max-width: 1364px) {
+			#chart-container {
+				position: absolute;
+				z-index: -1;
 			}
 		}
 
@@ -85,6 +95,12 @@
 				.card-right {
 					padding-left: 10px;
 					position: relative;
+
+					@media (max-width: 1364px) {
+						md-slider {
+							display: none;
+						}
+					}
 
 					.delete {
 						position: absolute;
