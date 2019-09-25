@@ -17,7 +17,7 @@
     "angular-material": "1.0.0",
     "angular-mocks": "1.6.9",
     "jest": "^23.6.0",
-    "materia-widget-development-kit": "^2.3.0"
+    "materia-widget-development-kit": "^2.5.0"
   },
   "jest": {
     "coverageReporters": [
