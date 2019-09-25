@@ -2,7 +2,7 @@
 
 ## Overview ##
 
-Radar Grapher is an unscored activity that asks students to respond to a series of questions by moving a corresponding slider. Once all questions are responded to, the student can then view their responses plotted on a radar graph.
+Radar Grapher is an unscored activity that asks students to respond to a series of questions by moving a corresponding slider. Once all questions are answered, the student can view their responses plotted on a radar graph.
 
 ![Radar Grapher Player Questionnaire](assets/play_widget_radar_grapher.png "Radar Grapher Player Questionnaire")
 
