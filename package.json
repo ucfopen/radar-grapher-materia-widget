@@ -12,7 +12,7 @@
     "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
   },
   "dependencies": {
-    "angular": "1.6.9",
+    "angular": "1.7.9",
     "angular-chart.js": "0.10.2",
     "angular-material": "1.0.0",
     "angular-mocks": "1.6.9",
