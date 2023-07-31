@@ -35,13 +35,25 @@
 	<body ng-app="RadarGrapherEngine" ng-controller="RadarGrapherEngineCtrl" ng-cloak>
 		<md-content id="container">
 			<md-toolbar>
+				<h1>{{instance.name}}</h1>
 				<div class="md-toolbar-tools">
-					<h2>{{instance.name}}</h2>
-					<span ng-if="!inProgress" ng-click="printResults()" class="icon-print non-printable" title="Print"></span>
-					<a ng-if="!inProgress" ng-click="graphToImage($event)" class="icon-image non-printable" title="Download Graph as Image"></a>
-					<span ng-if="!inProgress" ng-click="adjustResponses()" class="icon-return non-printable" title="Adjust Responses"></span>
+					<span ng-if="inResults" ng-click="printResults()" class="icon-print non-printable" title="Print"></span>
+					<span ng-if="inResults" ng-click="graphToImage($event)" class="icon-image non-printable" title="Download Graph as Image"></span>
+					<span ng-if="inResults" ng-click="adjustResponses()" class="icon-return non-printable" title="Adjust Responses"></span>
 				</div>
 			</md-toolbar>
+			<section ng-if="inTutorial">
+				<md-dialog aria-label="Tutorial dialog" aria-describedby="tutorial-content">
+					<md-dialog-content id="tutorial-content">
+					  <h1>Welcome to {{instance.name}}</h1>
+					  <p>Respond to each question using the sliders.</p>
+					  <p>When you are ready to see the results, click Submit.</p>
+					</md-dialog-content>
+					<md-dialog-actions>
+					  <md-button aria-label="{{'Welcome to ' + instance.name + '! Respond to each question using the sliders. You may use standard navigation keys or the Tab key to navigate between questions. Use the arrow keys to increase or decrease the slider. When you are finished, click Submit to see your results. Press to Start.'}}" ng-click="closeDialog()" class="md-primary">Start!</md-button>
+					</md-dialog-actions>
+				</md-dialog>
+			</section>
 			<section ng-if="inProgress">
 				<md-card ng-repeat="question in qset.items" ng-init="initResponse($index)" class="md-whiteframe-3dp card">
 					<md-card-title>
@@ -51,7 +63,7 @@
 						<div flex="15" layout layout-align="center center">
 							<span class="md-body-1">{{question.options.min}}</span>
 						</div>
-						<md-slider flex step="1" min="0" max="100" ng-model="responses[$index]" aria-label="slider" class>
+						<md-slider flex step="1" min="0" max="100" ng-model="responses[$index]" aria-label="{{'Question ' + ($index + 1) + ' of ' + qset.items.length + ': ' + question.questions[0].text + '. From ' + question.options.min + ' to ' + question.options.max + '.'}}" class>
 						</md-slider>
 						<div flex="15" layout layout-align="center center">
 							<span class="md-body-1">{{question.options.max}}</span>
@@ -62,13 +74,22 @@
 					<md-button class="md-raised md-primary" ng-click="submit()">Submit</md-button>
 				</section>
 			</section>
-			<section class="graph-output" ng-if="!inProgress">
-				<div class="cover">
-					<span ng-if="referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-off non-printable" title="Turn Off Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
-					<span ng-if="!referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-on non-printable" title="Turn On Reference Lines"><span class="modified-font">Toggle Reference Lines</span></span>
+			<section class="graph-output" ng-if="inResults">
+				<div class="cover" aria-hidden="true">
+					<button id="toggle-off" ng-if="referenceLinesToggled"
+					focus-me="referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-off non-printable" title="Turn Off Reference Lines"><span class="modified-font">Toggle Reference Lines</span></button>
+					<button id="toggle-on" focus-me="!referenceLinesToggled" ng-if="!referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-on non-printable" title="Turn On Reference Lines"><span class="modified-font">Toggle Reference Lines</span></button>
 				</div>
-				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
-				<canvas id="outer-wheel"></canvas>
+				<canvas aria-hidden="true" id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
+				<canvas aria-hidden="true" id="outer-wheel"></canvas>
+				<div class="ariaResults">
+					<h2>Radar Graph Results</h2>
+					<p>The labels and their values are listed below.</p>
+					<div ng-repeat="label in labeledResponses">
+						<p>{{label.text}}: {{label.response}} %</p>
+					</div>
+					<p>End of labels.</p>
+				</div>
 			</section>
 		</md-content>
 	</body>

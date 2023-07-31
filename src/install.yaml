@@ -23,6 +23,10 @@ score:
 meta_data:
   features:
     - Customizable
+  accessibility_keyboard: Full # values can be Full | Limited | None
+  accessibility_reader: Full # values can be Full | Limited | None
+  accessibility_description: >
+    Supports standard navigation.
   supported_data:
     - Custom
   about: >
