@@ -80,7 +80,7 @@
 					focus-me="referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-off non-printable" title="Turn Off Reference Lines"><span class="modified-font">Toggle Reference Lines</span></button>
 					<button id="toggle-on" focus-me="!referenceLinesToggled" ng-if="!referenceLinesToggled" ng-click="toggleReferenceLines()" class="icon-toggle icon-toggle-on non-printable" title="Turn On Reference Lines"><span class="modified-font">Toggle Reference Lines</span></button>
 				</div>
-				<canvas aria-hidden="true" id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
+				<canvas id="radar" aria-label="Image of Radar Graph" class="chart chart-radar" chart-data="data" chart-labels="labels"></canvas>
 				<canvas aria-hidden="true" id="outer-wheel"></canvas>
 				<div class="ariaResults">
 					<h2>Radar Graph Results</h2>
