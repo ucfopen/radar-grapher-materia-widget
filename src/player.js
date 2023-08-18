@@ -27,13 +27,29 @@ RadarGrapher.config(['ChartJsProvider', ChartJsProvider =>
 
 	]);
 
-RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', function($scope) {
-	$scope.inProgress = true;
+RadarGrapher.directive('focusMe', ['$timeout', '$parse', function($timeout, $parse) {
+	return {
+		link: function (scope, element, attrs) {
+            const model = $parse(attrs.focusMe)
+			scope.$watch(model, function(value) {
+				if (value) {
+					$timeout(() => element[0].focus())
+				}
+			})
+        }
+	}
+}])
+
+RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', '$mdDialog', function($scope, $mdDialog) {
+	$scope.inProgress = false;
+	$scope.inTutorial = true;
+	$scope.inResults = false;
 
 	$scope.qset = null;
 	$scope.instance = null;
 	$scope.responses = [];
 	$scope.paddedResponses = [];
+	$scope.labeledResponses = [];
 	$scope.referenceLinesToggled;
 
 	$scope.printResults = () => window.print();
@@ -61,9 +77,19 @@ RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', function($scope) {
 
 		image = tempCanvas.toDataURL("image/png");
 
-		$event.currentTarget.href = image;
-		return $event.currentTarget.download = $scope.instance.name + ".png";
+		// download image
+		const a = document.createElement('a')
+		a.href = image
+		a.download = $scope.instance.name + ".png"
+		document.body.appendChild(a)
+		a.click()
+		document.body.removeChild(a)
 	};
+
+	$scope.closeDialog = () => {
+		$scope.inProgress = true;
+		$scope.inTutorial = false;
+	}
 
 	$scope.adjustResponses = () => $scope.inProgress = !$scope.inProgress;
 
@@ -131,10 +157,12 @@ RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', function($scope) {
 
 	$scope.submit = function() {
 		_padResponses();
+		_createAriaLabels();
 		$scope.data[0] = $scope.paddedResponses;
 
 		// Change the screen from questions to chart
 		$scope.inProgress = false;
+		$scope.inResults = true;
 		return $scope.referenceLinesToggled = false;
 	};
 
@@ -144,6 +172,15 @@ RadarGrapher.controller('RadarGrapherEngineCtrl', ['$scope', function($scope) {
 			// $scope.responses[i] = if response < 90 then response + 10 else response
 			($scope.paddedResponses[i] = Math.floor($scope.responses[i] * 0.8) + 10))
 	;
+
+	var _createAriaLabels = () => {
+		$scope.labeledResponses = $scope.responses.map((response, i) => {
+			return {
+				text: $scope.labels[i] || '',
+				response: response
+			}
+		})
+	}
 
 	// Draws the wheel that acts as a backdrop to the radar graph
 	// 	All values for outer wheel are based off of the values of the radar to
