@@ -3,7 +3,7 @@
   "materia": {
     "cleanName": "radar-grapher"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "start": "mwdk-start",
     "build": "mwdk-build-prod",
@@ -12,7 +12,7 @@
     "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
   },
   "dependencies": {
-    "angular": "1.6.9",
+    "angular": "1.8.3",
     "angular-chart.js": "0.10.2",
     "angular-material": "1.0.0",
     "angular-mocks": "1.6.9",
