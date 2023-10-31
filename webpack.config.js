@@ -3,14 +3,19 @@ const widgetWebpack = require('materia-widget-development-kit/webpack-widget')
 
 const copy = widgetWebpack.getDefaultCopyList()
 const defaultRules = widgetWebpack.getDefaultRules()
+const srcPath = path.join(__dirname, 'src')
 
 const entries = {
-	'creator.js':['./src/creator.js'],
-	'creator.css':['./src/creator.html','./src/creator.scss'],
-	'player.js':['./src/player.js'],
-	'player.css':['./src/player.html','./src/player.scss'],
-	'guides/creator.temp.html':['./src/_guides/creator.md'],
-	'guides/player.temp.html':['./src/_guides/player.md']
+	'player': [
+		path.join(srcPath, 'player.html'),
+		path.join(srcPath, 'player.js'),
+		path.join(srcPath, 'player.scss')
+	],
+	'creator': [
+		path.join(srcPath, 'creator.html'),
+		path.join(srcPath, 'creator.js'),
+		path.join(srcPath, 'creator.scss')
+	]
 }
 
 const customCopy = copy.concat([
@@ -42,11 +47,9 @@ const babelLoaderWithPolyfillRule = {
 
 const customRules = [
 	babelLoaderWithPolyfillRule,
-	defaultRules.loadAndPrefixCSS,
 	defaultRules.loadAndPrefixSASS,
 	defaultRules.loadHTMLAndReplaceMateriaScripts,
 	defaultRules.copyImages,
-	defaultRules.loadAndCompileMarkdown
 ]
 
 let options = {
