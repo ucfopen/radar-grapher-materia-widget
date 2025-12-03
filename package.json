@@ -5,9 +5,9 @@
   },
   "version": "1.0.4",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build-dev": "webpack",
-    "build": "webpack -p",
+    "start": "mwdk-start",
+    "build": "mwdk-build-prod",
+    "build-dev": "mwdk-build-dev",
     "test": "TZ='America/New_York' jest --verbose",
     "test-ci": "TZ='America/New_York' CI=true jest --ci --useStderr --coverage --coverageReporters text-summary cobertura"
   },
@@ -17,7 +17,7 @@
     "angular-material": "1.0.0",
     "angular-mocks": "1.6.9",
     "jest": "^23.6.0",
-    "materia-widget-development-kit": "^2.5.2"
+    "materia-widget-development-kit": "3.0.4"
   },
   "jest": {
     "coverageReporters": [

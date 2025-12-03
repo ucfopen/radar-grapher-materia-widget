@@ -1,16 +1,20 @@
 const path = require('path')
+const srcPath = path.join(process.cwd(), 'src')
 const widgetWebpack = require('materia-widget-development-kit/webpack-widget')
 
 const copy = widgetWebpack.getDefaultCopyList()
-const defaultRules = widgetWebpack.getDefaultRules()
 
 const entries = {
-	'creator.js':['./src/creator.js'],
-	'creator.css':['./src/creator.html','./src/creator.scss'],
-	'player.js':['./src/player.js'],
-	'player.css':['./src/player.html','./src/player.scss'],
-	'guides/creator.temp.html':['./src/_guides/creator.md'],
-	'guides/player.temp.html':['./src/_guides/player.md']
+	'creator': [
+		path.join(srcPath, 'creator.html'),
+		path.join(srcPath, 'creator.scss'),
+		path.join(srcPath, 'creator.js')
+	],
+	'player': [
+		path.join(srcPath, 'player.html'),
+		path.join(srcPath, 'player.scss'),
+		path.join(srcPath, 'player.js')
+	]
 }
 
 const customCopy = copy.concat([
@@ -29,31 +33,9 @@ const customCopy = copy.concat([
 	}
 ])
 
-const babelLoaderWithPolyfillRule = {
-	test: /\.js$/,
-	exclude: /node_modules/,
-	use: {
-		loader: 'babel-loader',
-		options: {
-			presets: ['@babel/preset-env']
-		}
-	}
-}
-
-const customRules = [
-	babelLoaderWithPolyfillRule,
-	defaultRules.loadAndPrefixCSS,
-	defaultRules.loadAndPrefixSASS,
-	defaultRules.loadHTMLAndReplaceMateriaScripts,
-	defaultRules.copyImages,
-	defaultRules.loadAndCompileMarkdown
-]
-
 let options = {
 	copyList: customCopy,
 	entries: entries,
-	moduleRules: customRules
 }
 
-// load the reusable legacy webpack config from materia-widget-dev
 module.exports =  widgetWebpack.getLegacyWidgetBuildConfig(options)
