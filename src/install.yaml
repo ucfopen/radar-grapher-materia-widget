@@ -37,3 +37,5 @@ meta_data:
     A tool for creating custom radar charts. Specify topics for each axis;
     students respond to each via sliders, and the results are displayed in
     the form of a printable chart.
+  update_method: github
+  repo: ucfopen/radar-grapher-materia-widget
